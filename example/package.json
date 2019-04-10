@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "parcel watch index.html"
+    "dev": "parcel serve index.html"
+  },
+  "dependencies": {
+    "hyperapp": "^1.2.9"
   },
   "author": "",
   "license": "ISC"

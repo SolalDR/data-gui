@@ -1,5 +1,4 @@
+import GUI from "./components/GUI.jsx";
 
-
-export default function hello() {
-	console.log("Hello");
-}
+export {GUI};
+export default GUI;

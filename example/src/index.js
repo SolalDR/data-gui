@@ -1,3 +1,35 @@
-import All from "./../../dist/index.esm.js";
+import GUI from "./../../dist/index.js";
 
-All.hello();
+var config = {
+  scene: {
+    fov: 23
+  }
+}
+
+var gui = new GUI({
+  element: document.body
+});
+
+gui.addEntry(config.scene, 'fov', {
+  max: 1,
+  onChange: (value)=>{
+    console.log('change');
+  },
+  onInput: ()=>{
+    console.log('input')
+  }
+})
+
+// gui.add({
+//   type: 'folder',
+//   name: 'GUI',
+//   slug: 'root',
+//   entries: [
+//     {
+//       type: 'folder',
+//       name: 'Scene',
+//       slug: 'scene',
+//       entries: []
+//     },
+//   ]
+// })
