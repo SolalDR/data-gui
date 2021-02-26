@@ -1,6 +1,12 @@
-# GUI
+# tweak-dat-ui
 
-A scalable graphic user interface based on hyperapp.
+A scalable and very lightweight user interface o tweak variables in JS.
+
+# Installation
+
+```
+npm i tweak-dat-ui
+```
 
 ## License
 
