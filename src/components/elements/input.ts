@@ -1,12 +1,13 @@
 import { LitElement, html, css, property, customElement } from 'lit-element'
 
 @customElement('gui-input')
-export class SimpleGreeting extends LitElement {
+export class Input extends LitElement {
   @property() label = null
-  @property() type = 'text'
+  @property({ reflect: true }) type = 'text'
   @property() value = ''
 
   static styles = css`
+    /*minify*/
     p {
       height: var(--input-height, 20px);
       display: inline-block;
@@ -39,6 +40,12 @@ export class SimpleGreeting extends LitElement {
       box-shadow: 0;
       outline: 0;
       color: var(--input-text, #000);
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   `
 

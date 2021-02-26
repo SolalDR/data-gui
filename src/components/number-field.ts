@@ -2,7 +2,6 @@ import { html, property, customElement, css } from 'lit-element'
 import { BaseField, FieldConstructor } from '../field'
 
 interface NumberFieldConstructor extends FieldConstructor {
-  name?: string
   min?: number
   max?: number
   step?: number
@@ -18,6 +17,7 @@ export class NumberField extends BaseField {
   @property() range: boolean
 
   public static styles = css`
+    /*minify*/
     ${BaseField.styles}
 
     .right {
@@ -110,12 +110,8 @@ export class NumberField extends BaseField {
     }
   `
 
-  constructor(
-    property: string,
-    target: string,
-    parameters: NumberFieldConstructor,
-  ) {
-    super(property, target, parameters)
+  constructor(parameters: NumberFieldConstructor) {
+    super(parameters)
     const { min, max, range, step } = parameters
     this.range = typeof range === 'boolean' ? range : !!(min && max)
     this.min = min ? min : this.range ? 0 : -Infinity

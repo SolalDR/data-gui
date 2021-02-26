@@ -1,77 +1,3 @@
-// import commonjs from 'rollup-plugin-commonjs';
-// import pkg from './package.json';
-// import typescript from '@rollup/plugin-typescript';
-
-
-// export default [
-// 	// browser-friendly UMD build
-// 	// {
-// 	// 	input: 'src/main.ts',
-// 	// 	output: {
-// 	// 		name: 'howLongUntilLunch',
-// 	// 		file: pkg.browser,
-// 	// 		format: 'umd',
-// 	// 		sourcemap: true
-// 	// 	},
-// 	// 	plugins: [
-// 	// 		resolve({ extensions: ['.ts'] }),
-// 	// 		typescript()
-// 	// 	]
-// 	// },
-
-// 	// CommonJS (for Node) and ES module (for bundlers) build.
-// 	// (We could have three entries in the configuration array
-// 	// instead of two, but it's quicker to generate multiple
-// 	// builds from a single configuration where possible, using
-// 	// an array for the `output` option, where we can specify 
-// 	// `file` and `format` for each target)
-// 	// {
-// 	// 	input: 'src/main.js',
-// 	// 	external: ['ms'],
-// 	// 	output: [
-// 	// 		{ file: pkg.main, format: 'cjs' },
-// 	// 		{ file: pkg.module, format: 'es' }
-// 	// 	],
-// 	// 	plugins: [
-// 	// 		typescript()
-// 	// 	]
-// 	// },
-
-// 	{
-// 		input: 'src/main.ts',
-// 		output: [
-// 			{
-// 				file: pkg.main,
-// 				format: 'cjs',
-// 			},
-// 			{
-// 				file: pkg.module,
-// 				format: 'es',
-// 			},
-// 		],
-// 		external: [
-// 			...Object.keys(pkg.dependencies || {}),
-// 			...Object.keys(pkg.peerDependencies || {}),
-// 		],
-// 		plugins: [
-// 			typescript(),
-// 		],
-// 	}
-// 	// {
-// 	// 	input: 'example/src/index.js',
-// 	// 	output: {
-// 	// 		name: 'howLongUntilLunch',
-// 	// 		file: 'example/dist/index.js',
-// 	// 		format: 'umd'
-// 	// 	},
-// 	// 	plugins: [
-// 	// 		resolve(), // so Rollup can find `ms`
-// 	// 		commonjs() // so Rollup can convert `ms` to an ES module
-// 	// 	]
-// 	// },
-// ];
-
-
 import external from 'rollup-plugin-peer-deps-external';
 import ts from 'rollup-plugin-ts';
 import { terser } from 'rollup-plugin-terser';
@@ -79,10 +5,22 @@ import resolve from '@rollup/plugin-node-resolve';
 import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
-import styles from "rollup-plugin-styles";
+import cleanup from 'rollup-plugin-cleanup';
+
+import minifyCssTemplate from './minify-css-template'
 
 import pkg from './package.json';
 import tsconfig from './tsconfig.json';
+  
+var minify = function (str) {
+  str = str.replace(/\/\*(.|\n)*?\*\//g, ""); // multiline comments
+  str = str.replace(/\s*(\{|\}|\[|\]|\(|\)|\:|\;|\,)\s*/g, "$1"); // space before chars (){}[]:;,
+  str = str.replace(/#([\da-fA-F])\1([\da-fA-F])\2([\da-fA-F])\3/g, "#$1$2$3"); // condense hex code #FFFFFF => #FFF
+  str = str.replace(/\n/g, "");
+  str = str.replace(/;\}/g, "}");
+  str = str.replace(/^\s+|\s+$/g, "");
+  return str;
+};
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -113,6 +51,7 @@ export default [
       commonjs({
         include: ['node_modules/**'],
       }),
+      minifyCssTemplate(),
       production && filesize()
     ],
   },
@@ -130,6 +69,8 @@ export default [
       commonjs({
         include: ['node_modules/**'],
       }),
+      cleanup({comments: 'none'}),
+      minifyCssTemplate(),
       terser(),
       production && filesize(),
     ],

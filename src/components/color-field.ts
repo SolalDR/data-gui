@@ -1,9 +1,7 @@
-import 'vanilla-colorful/rgba-color-picker.js'
 import { html, property, customElement, css, query } from 'lit-element'
 import { BaseField, FieldConstructor } from '../field'
 import { Color, isColor } from '../helpers/color-helper'
 import './elements/input'
-
 ;(window as any).Color = Color
 interface ColorFieldConstructor extends FieldConstructor {
   name?: string
@@ -18,12 +16,13 @@ export class ColorField extends BaseField {
   @query('input') input: HTMLElement
 
   public static styles = css`
+    /*minify*/
     ${BaseField.styles}
-
     .input-color {
       max-width: 20px;
       height: 100%;
     }
+
     .input-color span {
       position: absolute;
       top: 50%;
@@ -67,12 +66,8 @@ export class ColorField extends BaseField {
     }
   `
 
-  constructor(
-    property: string,
-    target: string,
-    parameters: ColorFieldConstructor,
-  ) {
-    super(property, target, parameters)
+  constructor(parameters: ColorFieldConstructor) {
+    super(parameters)
   }
 
   firstUpdated() {
@@ -107,7 +102,6 @@ export class ColorField extends BaseField {
     this.color.setStyle(event.target.value)
     this.set(this.color.format())
     this.updateInputValue()
-    // console.log(this.inputValue, this.color)
     super.onInput(event)
   }
 
@@ -124,8 +118,6 @@ export class ColorField extends BaseField {
     } else {
       this.color[channel] = Number(value) / 255
     }
-    // this.set(this.color.format());
-    // this.updateInputValue()
   }
 
   protected onChangeChannel(channel, value) {
@@ -145,6 +137,7 @@ export class ColorField extends BaseField {
             class="input-channel"
             .value=${String(this.color.a)}
             label="A"
+            type="number"
             @change=${event => this.onChangeChannel('a', event.detail)}
             @input=${event => this.onInputChannel('a', event.detail)}
           ></gui-input>
@@ -171,6 +164,7 @@ export class ColorField extends BaseField {
 
           <gui-input
             class="input-channel"
+            type="number"
             .value=${String(~~(this.color.r * 255))}
             label="R"
             @change=${event => this.onChangeChannel('r', event.detail)}
@@ -178,6 +172,7 @@ export class ColorField extends BaseField {
           ></gui-input>
           <gui-input
             class="input-channel"
+            type="number"
             .value=${String(~~(this.color.g * 255))}
             label="G"
             @change=${event => this.onChangeChannel('g', event.detail)}
@@ -185,6 +180,7 @@ export class ColorField extends BaseField {
           ></gui-input>
           <gui-input
             class="input-channel"
+            type="number"
             .value=${String(~~(this.color.b * 255))}
             label="B"
             @change=${event => this.onChangeChannel('b', event.detail)}

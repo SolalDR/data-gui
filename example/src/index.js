@@ -10,6 +10,9 @@ const target = {
   color: "rgba(232, 93, 93, 0.5)",
   color2: "#FF23FE21",
   color3: { h: 1, s: 0.5, l: 0.3 },
+  method: (a, b) => {
+    console.log(a, b)
+  }
 }
 
 const testDiv = document.querySelector('#test');
@@ -18,20 +21,28 @@ const update = () => {
   testDiv.innerHTML = JSON.stringify(target);
 }
 
+a.add('a', target).on('input', update);
+
 a.add('a', target, {
   min: -1,
   max: 1000,
   range: false,
-  name: 'Letter A',
   listen: true
 }).on('input', update);
 
 a.add('a', target, {
   min: -1,
   max: 1000,
-  name: 'A with range',
   listen: true
 }).on('input', update);
+
+a.action(() => {
+  console.log('hello')
+})
+
+a.action(() => {
+  console.log('hello')
+})
 
 a.add('test', target, {
   min: -1,
@@ -56,6 +67,8 @@ g.add('color3', target, {
   min: -1,
   max: 1000,
 }).on('input', update);
+
+
 
 const g2 = g.group({
   name: 'innerGroup'

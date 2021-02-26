@@ -2,7 +2,6 @@ import { html, property, customElement, css } from 'lit-element'
 import { BaseField, FieldConstructor } from '../field'
 
 interface TextFieldConstructor extends FieldConstructor {
-  name?: string
   min?: number
   max?: number
 }
@@ -14,15 +13,12 @@ export class TextField extends BaseField {
   @property() max: number
 
   public static styles = css`
+    /*minify*/
     ${BaseField.styles}
   `
 
-  constructor(
-    property: string,
-    target: string,
-    parameters: TextFieldConstructor,
-  ) {
-    super(property, target, parameters)
+  constructor(parameters: TextFieldConstructor) {
+    super(parameters)
     const { min, max } = parameters
     this.min = min ? min : -Infinity
     this.max = max ? max : Infinity

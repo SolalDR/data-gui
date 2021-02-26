@@ -5,14 +5,17 @@ import { BaseField } from './field'
 
 export interface GroupConstructor {
   name?: string
-  children?: Array<LitElement>
+  children?: Array<BaseGroup | BaseField>
+  parent?: BaseGroup
 }
 
 export class BaseGroup extends WebComponent {
   @property() name: string
-  @property() childrenControllers: Array<LitElement> = []
+  @property() childrenControllers: Array<BaseGroup | BaseField> = []
+  parent?: BaseGroup = null
 
   public static styles = css`
+    /*minify*/
     span {
       display: flex;
       flex-direction: column;
@@ -27,34 +30,65 @@ export class BaseGroup extends WebComponent {
     }
   `
 
-  constructor({ name = '', children = [] }: GroupConstructor = {}) {
+  constructor({
+    name = '',
+    children = [],
+    parent = null,
+  }: GroupConstructor = {}) {
     super()
     this.name = name
     this.childrenControllers = children
+    this.parent = parent
   }
 
-  add(property: string, target: any, params: any): any {
+  get(name) {
+    if (!name) return null
+    return this.childrenControllers.find(controller => {
+      return controller.name === name
+    })
+  }
+
+  private validateName(name: string) {
+    let checkValid = name =>
+      this.childrenControllers.filter(c => c.name === name).length === 0
+    let count = 1
+    let isValid = checkValid(name)
+    if (isValid) return name
+    while (!isValid) {
+      count++
+      isValid = checkValid(name + String(count))
+    }
+    return name + String(count)
+  }
+
+  add(property: string, target: Object = {}, params: any = {}): any {
     const constructor = getFieldConstructor(target[property])
-    const field = new constructor(property, target, params)
+    const field = new constructor({
+      ...params,
+      name: this.validateName(params.name || property),
+      property,
+      target,
+      parent: this,
+    })
     this.childrenControllers.push(field)
     return field
+  }
+
+  action(callback: Function, parameters: Object) {
+    if (typeof callback !== 'function')
+      throw new Error('Argument "callback" is not a function')
+    const target = { action: callback }
+    this.add('action', target, {
+      ...parameters,
+    })
   }
 
   delete(field: BaseField | BaseGroup) {
     const i = this.childrenControllers.findIndex(child => {
       return child === field
     })
-    if (field instanceof BaseGroup) {
-      field.destroy()
-    }
     this.childrenControllers.splice(i, 1)
     this.forceRender()
-  }
-
-  destroy() {
-    this.childrenControllers.forEach(controller => {
-      this.delete(controller as BaseField | BaseGroup)
-    })
   }
 
   render() {

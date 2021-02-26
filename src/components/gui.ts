@@ -17,6 +17,7 @@ class GUI extends Group {
   @property({ type: String, reflect: true }) public position?: string
 
   public static styles = css`
+    /*minify*/
     ${globalStyle}
     ${BaseGroup.styles}
 
@@ -73,7 +74,7 @@ class GUI extends Group {
       border-top-left-radius: var(--radius);
     }
 
-    button.close {
+    button {
       position: absolute;
       top: 0;
       right: 100%;

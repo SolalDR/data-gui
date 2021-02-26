@@ -11,6 +11,7 @@ export class Group extends BaseGroup {
   @query('.group-body') groupElement: HTMLElement
 
   public static styles = css`
+    /*minify*/
     ${BaseGroup.styles} :host {
       margin-top: 20px;
       --group-height: 1000px;
@@ -33,6 +34,7 @@ export class Group extends BaseGroup {
       max-height: var(--item-height);
       overflow: hidden;
     }
+
     .group .group-body {
       opacity: 0;
       transform: translateX(-5px);

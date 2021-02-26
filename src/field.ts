@@ -1,6 +1,7 @@
 import { property, css } from 'lit-element'
 import { WebComponent } from '@/component'
 import raf from '@solaldr/raf'
+import { BaseGroup } from './group'
 
 // TODO remove
 ;(window as any).raf = raf
@@ -8,15 +9,19 @@ import raf from '@solaldr/raf'
 export interface FieldConstructor {
   name?: string
   listen?: boolean
+  target?: Object
+  property?: string
+  parent?: BaseGroup
 }
 
 export class BaseField extends WebComponent {
   @property() name: string
   @property() property: string
-  @property() target: any
+  @property() target: Object
   @property() value: any
   listen: boolean = false
   listenCallback: Function
+  parent: BaseGroup
 
   // public on(eventName: string, callback: Function) {}
   // public off(eventName: string, callback: Function) {}
@@ -24,6 +29,7 @@ export class BaseField extends WebComponent {
   // public emit(eventName: string, datas: any) {}
 
   public static styles = css`
+    /*minify*/
     :host {
       height: var(--item-height, 30px);
       font-size: 1em;
@@ -76,17 +82,16 @@ export class BaseField extends WebComponent {
       box-shadow: none;
     }
   `
-  public constructor(
-    property: string,
-    target: string,
-    parameters: FieldConstructor,
-  )
-  constructor(
-    property: string,
-    target: string,
-    { name = null, listen = false }: FieldConstructor = {},
-  ) {
+  public constructor(parameters: FieldConstructor)
+  constructor({
+    name = null,
+    listen = false,
+    property = null,
+    target = null,
+    parent = null,
+  }: FieldConstructor = {}) {
     super()
+    this.parent = parent
     this.property = property
     this.target = target
     this.name = name ? name : this.property
@@ -115,7 +120,9 @@ export class BaseField extends WebComponent {
     }
   }
 
-  destroy() {}
+  destroy() {
+    this.parent.delete(this)
+  }
 
   protected set(value: any) {
     this.value = this.validate(value)
