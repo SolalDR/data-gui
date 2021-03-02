@@ -70,7 +70,8 @@ export class BaseField extends WebComponent {
       width: 100%;
     }
 
-    input, select {
+    input,
+    select {
       font-size: 1em;
       margin: 0;
       padding: 0;
@@ -148,7 +149,11 @@ export class BaseField extends WebComponent {
     return value
   }
 
-  static isCompatible(value: any, property: string = undefined, params: any = undefined): boolean {
+  static isCompatible(
+    value: any,
+    property: string = undefined,
+    params: any = undefined,
+  ): boolean {
     return true
   }
 

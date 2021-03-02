@@ -4,9 +4,11 @@ import { ColorField } from '@/components/color-field'
 import { FunctionField } from '@/components/function-field'
 import { BooleanField } from '@/components/boolean-field'
 import { SelectField } from '@/components/select-field'
+import { ImageField } from '@/components/image-field'
 
 export default (value: unknown, property: string, params: any) => {
   if (SelectField.isCompatible(value, property, params)) return SelectField
+  if (ImageField.isCompatible(value, property, params)) return ImageField
   if (NumberField.isCompatible(value)) return NumberField
   if (ColorField.isCompatible(value)) return ColorField
   if (TextField.isCompatible(value)) return TextField

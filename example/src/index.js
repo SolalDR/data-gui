@@ -11,6 +11,7 @@ const target = {
   color2: "#FF23FE21",
   color3: { h: 1, s: 0.5, l: 0.3 },
   testBool: false,
+  url: 'https://picsum.photos/id/237/200/300',
   method: (a, b) => {
     console.log(a, b)
   }
@@ -23,6 +24,7 @@ const update = () => {
 }
 
 a.add('a', target).on('input', update);
+a.add('url', target, { type: "image" }).on('change', update);
 a.add('testBool', target).addEventListener('change', update);
 a.add('test', target, {
   choices: ['Hello', 'Bruh', 'Bam', { label: 'Test', value: 'bruh'}]
