@@ -7,8 +7,10 @@ import { SelectController } from '@/controllers/select-controller'
 import { ImageController } from '@/controllers/image-controller'
 
 export default (value: unknown, property: string, params: any) => {
-  if (SelectController.isCompatible(value, property, params)) return SelectController
-  if (ImageController.isCompatible(value, property, params)) return ImageController
+  if (SelectController.isCompatible(value, property, params))
+    return SelectController
+  if (ImageController.isCompatible(value, property, params))
+    return ImageController
   if (NumberController.isCompatible(value)) return NumberController
   if (ColorController.isCompatible(value)) return ColorController
   if (TextController.isCompatible(value)) return TextController

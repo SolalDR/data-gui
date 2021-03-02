@@ -1,11 +1,19 @@
-# tweak-dat-ui
+# data-gui
 
-A scalable and very lightweight user interface o tweak variables in JS.
+A scalable and very lightweight user interface to tweak variables in JS.
+This tool is a modern alternative to Dat.GUI using webcomponents.
 
-# Installation
+## Features
+- Control several types of data (`number`, `string`, `blob`, `boolean`, `function`, `color`)
+- Automatically listen to outside changes and perform GUI updates
+- Create custom controller
+- Customize styles with CSS variables
+
+
+## Installation
 
 ```
-npm i tweak-dat-ui
+npm i data-gui
 ```
 
 ## License

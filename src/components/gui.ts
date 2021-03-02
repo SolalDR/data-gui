@@ -17,9 +17,7 @@ class GUI extends Group {
 
   public static styles = css`
     /*minify*/
-    ${BaseGroup.styles}
-
-  :host {
+    ${BaseGroup.styles} :host {
       --item-height: 30px;
       --input-height: 20px;
       --color-bg-primary: #fff;

@@ -1,6 +1,6 @@
 {
-  "name": "tweak-dat-ui",
-  "version": "0.0.1",
+  "name": "data-gui",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "browser": "dist/index.umd.js",
