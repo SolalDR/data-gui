@@ -1,17 +1,17 @@
 import { html, property, css, LitElement } from 'lit-element'
 import { WebComponent } from '@/component'
-import getFieldConstructor from '@/helpers/get-field-constructor'
-import { BaseField } from './field'
+import getControllerConstructor from '@/helpers/get-field-constructor'
+import { BaseController } from './controller'
 
 export interface GroupConstructor {
   name?: string
-  children?: Array<BaseGroup | BaseField>
+  children?: Array<BaseGroup | BaseController>
   parent?: BaseGroup
 }
 
 export class BaseGroup extends WebComponent {
   @property() name: string
-  @property() childrenControllers: Array<BaseGroup | BaseField> = []
+  @property() childrenControllers: Array<BaseGroup | BaseController> = []
   parent?: BaseGroup = null
 
   public static styles = css`
@@ -62,7 +62,7 @@ export class BaseGroup extends WebComponent {
   }
 
   add(property: string, target: Object = {}, params: any = {}): any {
-    const constructor = getFieldConstructor(target[property], property, params)
+    const constructor = getControllerConstructor(target[property], property, params)
     const field = new constructor({
       ...params,
       name: this.validateName(params.name || property),
@@ -83,7 +83,7 @@ export class BaseGroup extends WebComponent {
     })
   }
 
-  delete(field: BaseField | BaseGroup) {
+  delete(field: BaseController | BaseGroup) {
     const i = this.childrenControllers.findIndex(child => {
       return child === field
     })

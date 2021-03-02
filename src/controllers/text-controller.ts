@@ -1,23 +1,23 @@
 import { html, property, customElement, css } from 'lit-element'
-import { BaseField, FieldConstructor } from '../field'
+import { BaseController, ControllerConstructor } from '../controller'
 
-interface TextFieldConstructor extends FieldConstructor {
+interface TextControllerConstructor extends ControllerConstructor {
   min?: number
   max?: number
 }
 
-@customElement('gui-text-field')
-export class TextField extends BaseField {
+@customElement('gui-text-controller')
+export class TextController extends BaseController {
   @property() name: string
   @property() min: number
   @property() max: number
 
   public static styles = css`
     /*minify*/
-    ${BaseField.styles}
+    ${BaseController.styles}
   `
 
-  constructor(parameters: TextFieldConstructor) {
+  constructor(parameters: TextControllerConstructor) {
     super(parameters)
     const { min, max } = parameters
     this.min = min ? min : -Infinity

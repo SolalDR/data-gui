@@ -6,7 +6,7 @@ import { BaseGroup } from './group'
 // TODO remove
 ;(window as any).raf = raf
 
-export interface FieldConstructor {
+export interface ControllerConstructor {
   name?: string
   listen?: boolean
   target?: Object
@@ -14,7 +14,7 @@ export interface FieldConstructor {
   parent?: BaseGroup
 }
 
-export class BaseField extends WebComponent {
+export class BaseController extends WebComponent {
   @property() name: string
   @property() property: string
   @property() target: Object
@@ -86,14 +86,14 @@ export class BaseField extends WebComponent {
       line-height: inherit;
     }
   `
-  public constructor(parameters: FieldConstructor)
+  public constructor(parameters: ControllerConstructor)
   constructor({
     name = null,
     listen = false,
     property = null,
     target = null,
     parent = null,
-  }: FieldConstructor = {}) {
+  }: ControllerConstructor = {}) {
     super()
     this.parent = parent
     this.property = property

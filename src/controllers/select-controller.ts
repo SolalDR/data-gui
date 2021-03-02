@@ -1,24 +1,24 @@
 import { html, property, customElement, css, query } from 'lit-element'
-import { BaseField, FieldConstructor } from '../field'
+import { BaseController, ControllerConstructor } from '../controller'
 
 interface SelectChoice {
   label: string
   value: string
 }
 
-interface SelectConstructor extends FieldConstructor {
+interface SelectConstructor extends ControllerConstructor {
   choices: Array<SelectChoice | string>
 }
 
-@customElement('gui-select-field')
-export class SelectField extends BaseField {
+@customElement('gui-select-controller')
+export class SelectController extends BaseController {
   @property() name: string
   @query('select') select: HTMLSelectElement
   choices: Array<SelectChoice>
 
   public static styles = css`
     /*minify*/
-    ${BaseField.styles}
+    ${BaseController.styles}
 
     select {
       appearance: none;

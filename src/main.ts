@@ -2,9 +2,9 @@ import GUI from '@/components/gui'
 import raf from '@solaldr/raf'
 raf.start()
 
-export { TextField } from './components/text-field'
-export { NumberField } from './components/number-field'
-export { ColorField } from './components/color-field'
-export { BooleanField } from './components/boolean-field'
+export { TextController } from './controllers/text-controller'
+export { NumberController } from './controllers/number-controller'
+export { ColorController } from './controllers/color-controller'
+export { BooleanController } from './controllers/boolean-controller'
 
 export default GUI

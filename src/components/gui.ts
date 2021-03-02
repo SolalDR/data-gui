@@ -1,7 +1,6 @@
 import { html, property, customElement, css } from 'lit-element'
 import { BaseGroup, GroupConstructor } from '@/group'
 import { Group } from '@/components/group'
-import globalStyle from '../styles/global.js'
 
 interface GUIConstructor {
   position?: string
@@ -18,7 +17,6 @@ class GUI extends Group {
 
   public static styles = css`
     /*minify*/
-    ${globalStyle}
     ${BaseGroup.styles}
 
   :host {
@@ -39,6 +37,7 @@ class GUI extends Group {
       --input-bg: var(--color-bg-primary);
 
       font-size: 64%;
+      font-family: sans-serif;
       width: var(--width, 300px);
       position: absolute;
       display: block;

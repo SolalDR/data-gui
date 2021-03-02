@@ -1,15 +1,15 @@
 import { html, property, customElement, css } from 'lit-element'
-import { BaseField, FieldConstructor } from '../field'
+import { BaseController, ControllerConstructor } from '../controller'
 
-interface NumberFieldConstructor extends FieldConstructor {
+interface NumberControllerConstructor extends ControllerConstructor {
   min?: number
   max?: number
   step?: number
   range?: boolean
 }
 
-@customElement('gui-number-field')
-export class NumberField extends BaseField {
+@customElement('gui-number-controller')
+export class NumberController extends BaseController {
   @property() name: string
   @property() min: number
   @property() max: number
@@ -18,7 +18,7 @@ export class NumberField extends BaseField {
 
   public static styles = css`
     /*minify*/
-    ${BaseField.styles}
+    ${BaseController.styles}
 
     .right {
       flex-direction: row;
@@ -110,7 +110,7 @@ export class NumberField extends BaseField {
     }
   `
 
-  constructor(parameters: NumberFieldConstructor) {
+  constructor(parameters: NumberControllerConstructor) {
     super(parameters)
     const { min, max, range, step } = parameters
     this.range = typeof range === 'boolean' ? range : !!(min && max)

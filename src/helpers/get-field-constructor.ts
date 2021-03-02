@@ -1,17 +1,17 @@
-import { NumberField } from '@/components/number-field'
-import { TextField } from '@/components/text-field'
-import { ColorField } from '@/components/color-field'
-import { FunctionField } from '@/components/function-field'
-import { BooleanField } from '@/components/boolean-field'
-import { SelectField } from '@/components/select-field'
-import { ImageField } from '@/components/image-field'
+import { NumberController } from '@/controllers/number-controller'
+import { TextController } from '@/controllers/text-controller'
+import { ColorController } from '@/controllers/color-controller'
+import { ActionController } from '@/controllers/action-controller'
+import { BooleanController } from '@/controllers/boolean-controller'
+import { SelectController } from '@/controllers/select-controller'
+import { ImageController } from '@/controllers/image-controller'
 
 export default (value: unknown, property: string, params: any) => {
-  if (SelectField.isCompatible(value, property, params)) return SelectField
-  if (ImageField.isCompatible(value, property, params)) return ImageField
-  if (NumberField.isCompatible(value)) return NumberField
-  if (ColorField.isCompatible(value)) return ColorField
-  if (TextField.isCompatible(value)) return TextField
-  if (FunctionField.isCompatible(value)) return FunctionField
-  if (BooleanField.isCompatible(value)) return BooleanField
+  if (SelectController.isCompatible(value, property, params)) return SelectController
+  if (ImageController.isCompatible(value, property, params)) return ImageController
+  if (NumberController.isCompatible(value)) return NumberController
+  if (ColorController.isCompatible(value)) return ColorController
+  if (TextController.isCompatible(value)) return TextController
+  if (ActionController.isCompatible(value)) return ActionController
+  if (BooleanController.isCompatible(value)) return BooleanController
 }

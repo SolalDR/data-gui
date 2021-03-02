@@ -1,31 +1,24 @@
 import { html, property, customElement, css } from 'lit-element'
-import { BaseField, FieldConstructor } from '../field'
-import './elements/button'
-// import { getFieldConstructor } from '../helpers/get-field-constructor'
+import { BaseController, ControllerConstructor } from '../controller'
+import '@/components/elements/button'
 
-interface FunctionFieldConstructor extends FieldConstructor {}
+interface ActionControllerConstructor extends ControllerConstructor {}
 
-interface ArgumentObjectFunction extends FieldConstructor {
-  value: unknown
-}
-
-type ArgumentFunction = ArgumentObjectFunction | unknown
-
-@customElement('gui-function-field')
-export class FunctionField extends BaseField {
+@customElement('gui-action-controller')
+export class ActionController extends BaseController {
   @property() name: string
-  @property() args: Array<FieldConstructor> = []
+  @property() args: Array<ControllerConstructor> = []
 
   public static styles = css`
     /*minify*/
-    ${BaseField.styles}
+    ${BaseController.styles}
     .right > gui-button {
       flex: none;
       display: inline-block;
     }
   `
 
-  constructor(parameters: FunctionFieldConstructor) {
+  constructor(parameters: ActionControllerConstructor) {
     super(parameters)
   }
 
@@ -52,7 +45,7 @@ export class FunctionField extends BaseField {
 
   render() {
     // const arguments = this.args.map(argument => {
-    //   return getFieldConstructor()
+    //   return getControllerConstructor()
     // })
     return html`
       <div>

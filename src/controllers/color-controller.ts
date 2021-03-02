@@ -1,14 +1,14 @@
 import { html, property, customElement, css, query } from 'lit-element'
-import { BaseField, FieldConstructor } from '../field'
-import { Color, isColor } from '../helpers/color-helper'
-import './elements/input'
-;(window as any).Color = Color
-interface ColorFieldConstructor extends FieldConstructor {
+import { BaseController, ControllerConstructor } from '../controller'
+import { Color, isColor } from '@/helpers/color-helper'
+import '@/components/elements/input'
+
+interface ColorControllerConstructor extends ControllerConstructor {
   name?: string
 }
 
-@customElement('gui-color-field')
-export class ColorField extends BaseField {
+@customElement('gui-color-controller')
+export class ColorController extends BaseController {
   color: Color
   inputValue: string
   labelValue: string
@@ -17,7 +17,7 @@ export class ColorField extends BaseField {
 
   public static styles = css`
     /*minify*/
-    ${BaseField.styles}
+    ${BaseController.styles}
     .input-color {
       max-width: 20px;
       height: 100%;
@@ -66,7 +66,7 @@ export class ColorField extends BaseField {
     }
   `
 
-  constructor(parameters: ColorFieldConstructor) {
+  constructor(parameters: ColorControllerConstructor) {
     super(parameters)
   }
 

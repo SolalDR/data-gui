@@ -1,18 +1,17 @@
 import { html, property, customElement, css, query } from 'lit-element'
-import { BaseField, FieldConstructor } from '../field'
+import { BaseController, ControllerConstructor } from '../controller'
 
-@customElement('gui-image-field')
-export class ImageField extends BaseField {
+@customElement('gui-image-controller')
+export class ImageController extends BaseController {
   @property() name: string
   @query('input') input: HTMLInputElement
 
   public static styles = css`
     /*minify*/
-    ${BaseField.styles}
-    :host {
+    ${BaseController.styles} :host {
       min-height: 50px;
     }
-    :host > div  {
+    :host > div {
       height: 100%;
     }
     .right {
@@ -33,7 +32,7 @@ export class ImageField extends BaseField {
     }
   `
 
-  constructor(parameters: FieldConstructor) {
+  constructor(parameters: ControllerConstructor) {
     super(parameters)
   }
 
@@ -43,14 +42,14 @@ export class ImageField extends BaseField {
       (typeof value === 'string' && value.match(/.+?(png|jpe?g|webp|gif|bmp)$/))
     )
   }
-  
+
   /**
    * @override
    */
   protected onChange(event) {
     const file = this.input.files && this.input.files[0]
-    if (!file) return;
-    if (!file.type.match('image')) return;
+    if (!file) return
+    if (!file.type.match('image')) return
     const blob = URL.createObjectURL(file)
     this.set(blob)
     super.onChange(event)
@@ -62,8 +61,8 @@ export class ImageField extends BaseField {
       <div>
         <label>${this.name}</label>
         <div class="right">
-          <img src=${this.value}>
-          <input type="file" @change=${(event) => this.onChange(event)} />
+          <img src=${this.value} />
+          <input type="file" @change=${event => this.onChange(event)} />
         </div>
       </div>
     `

@@ -1,14 +1,14 @@
 import { html, property, customElement, css, query } from 'lit-element'
-import { BaseField, FieldConstructor } from '../field'
+import { BaseController, ControllerConstructor } from '../controller'
 
-@customElement('gui-boolean-field')
-export class BooleanField extends BaseField {
+@customElement('gui-boolean-controller')
+export class BooleanController extends BaseController {
   @property() name: string
   @query('input') input: HTMLInputElement
 
   public static styles = css`
     /*minify*/
-    ${BaseField.styles}
+    ${BaseController.styles}
     .right input[type="checkbox"] {
       width: 15px !important;
       height: 15px !important;
@@ -30,7 +30,7 @@ export class BooleanField extends BaseField {
     }
   `
 
-  constructor(parameters: FieldConstructor) {
+  constructor(parameters: ControllerConstructor) {
     super(parameters)
   }
 
