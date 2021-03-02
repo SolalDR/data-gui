@@ -128,14 +128,17 @@ export class BaseField extends WebComponent {
     this.value = this.validate(value)
     this.target[this.property] = this.value
     this.emit('update', this.value)
+    this.dispatchEvent(new CustomEvent('update', { detail: this.value }))
   }
 
   protected onInput(event) {
     this.emit('input', this.value)
+    this.dispatchEvent(new CustomEvent('input', { detail: this.value }))
   }
 
   protected onChange(event) {
     this.emit('change', this.value)
+    this.dispatchEvent(new CustomEvent('change', { detail: this.value }))
   }
 
   protected validate(value: any): any {

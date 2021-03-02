@@ -10,6 +10,7 @@ const target = {
   color: "rgba(232, 93, 93, 0.5)",
   color2: "#FF23FE21",
   color3: { h: 1, s: 0.5, l: 0.3 },
+  testBool: false,
   method: (a, b) => {
     console.log(a, b)
   }
@@ -22,6 +23,7 @@ const update = () => {
 }
 
 a.add('a', target).on('input', update);
+a.add('testBool', target).addEventListener('change', update);
 
 a.add('a', target, {
   min: -1,
