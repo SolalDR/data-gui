@@ -62,7 +62,7 @@ export class BaseGroup extends WebComponent {
   }
 
   add(property: string, target: Object = {}, params: any = {}): any {
-    const constructor = getFieldConstructor(target[property])
+    const constructor = getFieldConstructor(target[property], property, params)
     const field = new constructor({
       ...params,
       name: this.validateName(params.name || property),

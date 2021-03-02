@@ -24,6 +24,9 @@ const update = () => {
 
 a.add('a', target).on('input', update);
 a.add('testBool', target).addEventListener('change', update);
+a.add('test', target, {
+  choices: ['Hello', 'Bruh', 'Bam', { label: 'Test', value: 'bruh'}]
+}).addEventListener('change', update);
 
 a.add('a', target, {
   min: -1,

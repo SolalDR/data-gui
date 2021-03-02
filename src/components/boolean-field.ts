@@ -25,7 +25,7 @@ export class BooleanField extends BaseField {
       transition-duration: 0.3s;
       transition-property: background-color;
     }
-    input[value="true"] + .customCheckbox {
+    input[value='true'] + .customCheckbox {
       background: var(--color-primary);
     }
   `
@@ -69,7 +69,10 @@ export class BooleanField extends BaseField {
               this.onChange(event)
             }}
           />
-          <span .data-checked=${this.value ? "1" : "2"} class="customCheckbox"></span>
+          <span
+            .data-checked=${this.value ? '1' : '2'}
+            class="customCheckbox"
+          ></span>
         </div>
       </div>
     `
