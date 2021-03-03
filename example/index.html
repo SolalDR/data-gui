@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>GUI</title>
+        <title>data-gui</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/github.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
     </head>
@@ -9,7 +9,17 @@
             <canvas id="canvas"></canvas>
             <pre><code class="js"></code></pre>
         </div>
-        <a href="https://github.com/SolalDR/data-gui/blob/master/example/src/index.js">View source</a>
+        <div>
+
+        <div class="actions">
+            <a href="https://github.com/SolalDR/data-gui/blob/master/example/src/index.js">View source</a>
+            <a href="https://github.com/SolalDR/data-gui">Github</a>
+            <a href="https://www.npmjs.com/package/data-gui">NPM</a>
+            <a href="https://solaldr.github.io/data-gui/index.html">Docs</a>
+        </div>
+            
+        </div>
+        
         <script src="./dist/index.js"></script>
     </body>
     <style>
@@ -26,15 +36,21 @@
             left: 50%;
             transform: translateX(-50%) translateY(-50%);
         }
-        a {
+        .actions {
             position: absolute;
             bottom: 20px;
             right: 20px;
             text-decoration: none;
-            color: #006fbf;
             font-family: sans-serif;
             letter-spacing: 1px;
             font-size: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 5px;
+            color: #006fbf;
         }
     </style>
 </html>

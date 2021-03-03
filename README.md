@@ -5,6 +5,9 @@
 *A scalable and lightweight (~50kb) user interface to tweak variables in JS.
 This tool is a modern alternative to Dat.GUI using webcomponents.*
 
+See documentation [here](https://solaldr.github.io/data-gui/index.html)<br>
+Try demo [here](https://data-gui.netlify.app)<br>
+
 ## Features
 - Control several types of data (`number`, `string`, `blob`, `boolean`, `function`, `color`)
 - Automatically listen to outside changes and perform GUI updates

@@ -72,30 +72,30 @@
 						<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
 							<h2>How to use</h2>
 						</a>
-						<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">target</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">  </span><span style="color: #001080">colorHSL:</span><span style="color: #000000"> { </span><span style="color: #001080">h:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">s:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">l:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> },</span>
-<span style="color: #000000">  </span><span style="color: #001080">colorHSLA:</span><span style="color: #000000"> { </span><span style="color: #001080">h:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">s:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">l:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">a:</span><span style="color: #000000"> </span><span style="color: #098658">0.4</span><span style="color: #000000"> },</span>
-<span style="color: #000000">  </span><span style="color: #001080">colorHEX:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;#FFFFFF&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">colorHEX2:</span><span style="color: #000000"> </span><span style="color: #098658">0xFFFFFF</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">colorRGB:</span><span style="color: #000000"> {</span><span style="color: #001080">r:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">g:</span><span style="color: #000000"> </span><span style="color: #098658">244</span><span style="color: #000000">, </span><span style="color: #001080">b:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">},</span>
-<span style="color: #000000">  </span><span style="color: #001080">colorRGBA:</span><span style="color: #000000"> {</span><span style="color: #001080">r:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">g:</span><span style="color: #000000"> </span><span style="color: #098658">244</span><span style="color: #000000">, </span><span style="color: #001080">b:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">a:</span><span style="color: #000000"> </span><span style="color: #098658">0.5</span><span style="color: #000000">},</span>
-<span style="color: #000000">  </span><span style="color: #001080">colorRGBA:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;rgba(255, 244, 122, 0.5)&quot;</span>
-<span style="color: #000000">}</span>
-<span style="color: #000000">  </span>
-<span style="color: #008000">// Method 1</span>
-<span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;colorHSL&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">, {</span>
-<span style="color: #000000">  </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;color&quot;</span>
-<span style="color: #000000">}).</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;update&#039;</span><span style="color: #000000">, (</span><span style="color: #001080">hslObject</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">hslObject</span><span style="color: #000000">.</span><span style="color: #001080">h</span><span style="color: #000000">)</span>
-<span style="color: #000000">})</span>
-<span style="color: #000000"> </span>
-<span style="color: #008000">// Method 2 </span>
-<span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">color</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;colorRGBA&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">).</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;update&#039;</span><span style="color: #000000">, (</span><span style="color: #001080">rgbaString</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #001080">myElement</span><span style="color: #000000">.</span><span style="color: #001080">style</span><span style="color: #000000">.</span><span style="color: #001080">color</span><span style="color: #000000"> = </span><span style="color: #001080">rgbaString</span>
-<span style="color: #000000">})</span>
-</code></pre>
+						<p>``` javascript
+							const target = {
+							colorHSL: { h: 1, s: 1, l: 1 },
+							colorHSLA: { h: 1, s: 1, l: 1, a: 0.4 },
+							colorHEX: &quot;#FFFFFF&quot;,
+							colorHEX2: 0xFFFFFF,
+							colorRGB: {r: 1, g: 244, b: 1},
+							colorRGBA: {r: 1, g: 244, b: 1, a: 0.5},
+							colorRGBA: &quot;rgba(255, 244, 122, 0.5)&quot;
+						}</p>
 					</div>
-					<p>For more information about options or events see <a href="basecontroller.html">BaseController</a></p>
+					<p>// Method 1
+						group.add(&#39;colorHSL&#39;, target, {
+						type: &quot;color&quot;
+						}).on(&#39;update&#39;, (hslObject) =&gt; {
+						console.log(hslObject.h)
+					})</p>
+					<p>// Method 2
+						group.color(&#39;colorRGBA&#39;, target).on(&#39;update&#39;, (rgbaString) =&gt; {
+						myElement.style.color = rgbaString
+					})</p>
+					<pre><code>
+<span style="color: #001080">For</span><span style="color: #000000"> </span><span style="color: #001080">more</span><span style="color: #000000"> </span><span style="color: #001080">information</span><span style="color: #000000"> </span><span style="color: #001080">about</span><span style="color: #000000"> </span><span style="color: #001080">options</span><span style="color: #000000"> </span><span style="color: #001080">or</span><span style="color: #000000"> </span><span style="color: #001080">events</span><span style="color: #000000"> </span><span style="color: #001080">see</span><span style="color: #000000"> &lt;</span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #001080">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;basecontroller.html&quot;</span><span style="color: #000000">&gt;</span><span style="color: #001080">BaseController</span><span style="color: #000000">&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;</span>
+</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -160,7 +160,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controllers/color-controller.ts#L49">controllers/color-controller.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controllers/color-controller.ts#L49">controllers/color-controller.ts:49</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -183,7 +183,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#disabled">disabled</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L74">controller.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L74">controller.ts:74</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -199,7 +199,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#listen">listen</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L69">controller.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L69">controller.ts:69</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -218,7 +218,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L82">controller.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L82">controller.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -236,7 +236,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#parent">parent</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L99">controller.ts:99</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L99">controller.ts:99</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -247,7 +247,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#property">property</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L87">controller.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L87">controller.ts:87</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -263,7 +263,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#target">target</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L92">controller.ts:92</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L92">controller.ts:92</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -286,7 +286,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#add">add</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L162">controller.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L162">controller.ts:162</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -321,7 +321,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#destroy">destroy</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L155">controller.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L155">controller.ts:155</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -344,7 +344,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#forceupdate">forceUpdate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L146">controller.ts:146</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L146">controller.ts:146</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -367,7 +367,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#off">off</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/helpers/emitter-mixin.ts#L56">helpers/emitter-mixin.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/helpers/emitter-mixin.ts#L56">helpers/emitter-mixin.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -399,7 +399,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#on">on</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/helpers/emitter-mixin.ts#L14">helpers/emitter-mixin.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/helpers/emitter-mixin.ts#L14">helpers/emitter-mixin.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -426,7 +426,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#once">once</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/helpers/emitter-mixin.ts#L43">helpers/emitter-mixin.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/helpers/emitter-mixin.ts#L43">helpers/emitter-mixin.ts:43</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -458,7 +458,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#valueof">valueOf</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L198">controller.ts:198</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L198">controller.ts:198</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>

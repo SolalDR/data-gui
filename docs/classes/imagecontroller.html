@@ -69,19 +69,19 @@
 						<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
 							<h2>How to use</h2>
 						</a>
-						<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">target</span><span style="color: #000000"> = { </span>
-<span style="color: #000000">  </span><span style="color: #001080">image1:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;https://path/to/image.png&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">image2:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;https://path/to/image&quot;</span>
-<span style="color: #000000">}</span>
-<span style="color: #000000"> </span>
-<span style="color: #008000">// Automatically detect extension</span>
-<span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;image1&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">) </span><span style="color: #008000">// Automatically detect extension</span>
-<span style="color: #000000"> </span>
-<span style="color: #008000">// Force image type</span>
-<span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;image2&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">, { </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;image&#039;</span><span style="color: #000000"> })</span>
-</code></pre>
+						<p>``` javascript
+							const target = {
+							image1: &quot;<a href="https://path/to/image.png&quot;">https://path/to/image.png&quot;</a>,
+							image2: &quot;<a href="https://path/to/image&quot;">https://path/to/image&quot;</a>
+						}</p>
 					</div>
-					<p>For more information about options or events see <a href="basecontroller.html">BaseController</a></p>
+					<p>// Automatically detect extension
+					group.add(&#39;image1&#39;, target) // Automatically detect extension</p>
+					<p>// Force image type
+					group.add(&#39;image2&#39;, target, { type: &#39;image&#39; })</p>
+					<pre><code>
+<span style="color: #001080">For</span><span style="color: #000000"> </span><span style="color: #001080">more</span><span style="color: #000000"> </span><span style="color: #001080">information</span><span style="color: #000000"> </span><span style="color: #001080">about</span><span style="color: #000000"> </span><span style="color: #001080">options</span><span style="color: #000000"> </span><span style="color: #001080">or</span><span style="color: #000000"> </span><span style="color: #001080">events</span><span style="color: #000000"> </span><span style="color: #001080">see</span><span style="color: #000000"> &lt;</span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #001080">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;basecontroller.html&quot;</span><span style="color: #000000">&gt;</span><span style="color: #001080">BaseController</span><span style="color: #000000">&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;</span>
+</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -146,7 +146,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controllers/image-controller.ts#L26">controllers/image-controller.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controllers/image-controller.ts#L26">controllers/image-controller.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -169,7 +169,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#disabled">disabled</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L74">controller.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L74">controller.ts:74</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -185,7 +185,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#listen">listen</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L69">controller.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L69">controller.ts:69</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -204,7 +204,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L82">controller.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L82">controller.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -222,7 +222,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#parent">parent</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L99">controller.ts:99</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L99">controller.ts:99</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -233,7 +233,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#property">property</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L87">controller.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L87">controller.ts:87</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -249,7 +249,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#target">target</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L92">controller.ts:92</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L92">controller.ts:92</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -272,7 +272,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#add">add</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L162">controller.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L162">controller.ts:162</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -307,7 +307,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#destroy">destroy</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L155">controller.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L155">controller.ts:155</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -330,7 +330,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#forceupdate">forceUpdate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L146">controller.ts:146</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L146">controller.ts:146</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -353,7 +353,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#off">off</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/helpers/emitter-mixin.ts#L56">helpers/emitter-mixin.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/helpers/emitter-mixin.ts#L56">helpers/emitter-mixin.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -385,7 +385,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#on">on</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/helpers/emitter-mixin.ts#L14">helpers/emitter-mixin.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/helpers/emitter-mixin.ts#L14">helpers/emitter-mixin.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -412,7 +412,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#once">once</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/helpers/emitter-mixin.ts#L43">helpers/emitter-mixin.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/helpers/emitter-mixin.ts#L43">helpers/emitter-mixin.ts:43</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -444,7 +444,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="basecontroller.html">BaseController</a>.<a href="basecontroller.html#valueof">valueOf</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/6f3d4f3/src/controller.ts#L198">controller.ts:198</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L198">controller.ts:198</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
