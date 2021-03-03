@@ -9,8 +9,8 @@ interface TextControllerConstructor extends ControllerConstructor {
 @customElement('gui-text-controller')
 export class TextController extends BaseController {
   @property() name: string
-  @property() min: number
-  @property() max: number
+  @property({ type: Number }) min: number
+  @property({ type: Number }) max: number
 
   public static styles = css`
     /*minify*/

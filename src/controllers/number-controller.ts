@@ -11,10 +11,10 @@ interface NumberControllerConstructor extends ControllerConstructor {
 @customElement('gui-number-controller')
 export class NumberController extends BaseController {
   @property() name: string
-  @property() min: number
-  @property() max: number
-  @property() step: number
-  @property() range: boolean
+  @property({ type: Number }) min: number
+  @property({ type: Number }) max: number
+  @property({ type: Number }) step: number
+  @property({ type: Boolean }) range: boolean
 
   public static styles = css`
     /*minify*/

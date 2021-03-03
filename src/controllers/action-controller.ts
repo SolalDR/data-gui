@@ -7,7 +7,7 @@ interface ActionControllerConstructor extends ControllerConstructor {}
 @customElement('gui-action-controller')
 export class ActionController extends BaseController {
   @property() name: string
-  @property() args: Array<ControllerConstructor> = []
+  args: Array<ControllerConstructor> = []
 
   public static styles = css`
     /*minify*/
@@ -44,9 +44,6 @@ export class ActionController extends BaseController {
   }
 
   render() {
-    // const arguments = this.args.map(argument => {
-    //   return getControllerConstructor()
-    // })
     return html`
       <div>
         <label>${this.name}</label>
