@@ -4,6 +4,7 @@ import { LitElement, html, css, property, customElement } from 'lit-element'
 export class Input extends LitElement {
   @property() label = null
   @property({ reflect: true }) type = 'text'
+  @property({ reflect: true, type: Number }) step = 1
   @property() value = ''
 
   static styles = css`
@@ -77,6 +78,7 @@ export class Input extends LitElement {
         <input
           .type=${this.type}
           .value=${this.value}
+          .step=${String(this.step)}
           @input=${event => {
             this.onInput(event)
           }}

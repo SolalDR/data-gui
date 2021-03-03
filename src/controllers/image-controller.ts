@@ -1,11 +1,79 @@
 import { html, property, customElement, css, query } from 'lit-element'
 import { BaseController, ControllerConstructor } from '../controller'
 
+/**
+ * ## How to use
+ * ``` javascript
+ * const target = {
+ *   image1: "https://path/to/image.png",
+ *   image2: "https://path/to/image"
+ * }
+ *
+ * // Automatically detect extension
+ * group.add('image1', target) // Automatically detect extension
+ *
+ * // Force image type
+ * group.add('image2', target, { type: 'image' })
+ * ```
+ *
+ * For more information about options or events see {@link BaseController}
+ */
 @customElement('gui-image-controller')
 export class ImageController extends BaseController {
-  @property() name: string
+  /**
+   * @ignore
+   */
   @query('input') input: HTMLInputElement
 
+  constructor(parameters: ControllerConstructor) {
+    super(parameters)
+  }
+
+  /**
+   * @ignore
+   */
+  static isCompatible(value: unknown, _: string, params: any): boolean {
+    return !!(
+      params.type === 'image' ||
+      (typeof value === 'string' && value.match(/.+?(png|jpe?g|webp|gif|bmp)$/))
+    )
+  }
+
+  /**
+   * @override
+   */
+  protected onChange(event) {
+    const file = this.input.files && this.input.files[0]
+    if (!file) return
+    if (!file.type.match('image')) return
+    const blob = URL.createObjectURL(file)
+    this.set(blob)
+    super.onChange(event)
+    super.onInput(event)
+  }
+
+  /**
+   * @ignore
+   */
+  render() {
+    return html`
+      <div>
+        <label>${this.name}</label>
+        <div class="right">
+          <img src=${this.value} />
+          <input
+            type="file"
+            @change=${event => this.onChange(event)}
+            .disabled=${this.disabled}
+          />
+        </div>
+      </div>
+    `
+  }
+
+  /**
+   * @ignore
+   */
   public static styles = css`
     /*minify*/
     ${BaseController.styles} :host {
@@ -31,40 +99,4 @@ export class ImageController extends BaseController {
       margin: 5px 0;
     }
   `
-
-  constructor(parameters: ControllerConstructor) {
-    super(parameters)
-  }
-
-  static isCompatible(value: unknown, property: string, params: any): boolean {
-    return !!(
-      params.type === 'image' ||
-      (typeof value === 'string' && value.match(/.+?(png|jpe?g|webp|gif|bmp)$/))
-    )
-  }
-
-  /**
-   * @override
-   */
-  protected onChange(event) {
-    const file = this.input.files && this.input.files[0]
-    if (!file) return
-    if (!file.type.match('image')) return
-    const blob = URL.createObjectURL(file)
-    this.set(blob)
-    super.onChange(event)
-    super.onInput(event)
-  }
-
-  render() {
-    return html`
-      <div>
-        <label>${this.name}</label>
-        <div class="right">
-          <img src=${this.value} />
-          <input type="file" @change=${event => this.onChange(event)} />
-        </div>
-      </div>
-    `
-  }
 }

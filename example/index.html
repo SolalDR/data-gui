@@ -1,9 +1,40 @@
 <html>
-    <title>GUI</title>
+    <head>
+        <title>GUI</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+    </head>
     <body>
         <div id="test">
-            
+            <canvas id="canvas"></canvas>
+            <pre><code class="js"></code></pre>
         </div>
+        <a href="https://github.com/SolalDR/data-gui/blob/master/example/src/index.js">View source</a>
         <script src="./dist/index.js"></script>
     </body>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #EDEDED;
+        }
+        canvas {
+            background-color: white;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        a {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            text-decoration: none;
+            color: #006fbf;
+            font-family: sans-serif;
+            letter-spacing: 1px;
+            font-size: 10px;
+        }
+    </style>
 </html>

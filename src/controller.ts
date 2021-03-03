@@ -12,22 +12,196 @@ export interface ControllerConstructor {
   target?: Object
   property?: string
   parent?: BaseGroup
+  disabled?: boolean
 }
 
+/**
+ * `BaseController` is the common class used by all others controllers.
+ * - {@link ActionController}
+ * - {@link BooleanController}
+ * - {@link ColorController}
+ * - {@link ImageController}
+ * - {@link NumberController}
+ * - {@link SelectController}
+ * - {@link TextController}
+ *
+ * ## How to use
+ * ```javascript
+ * const target = { property: 1 }
+ * const controller = group.add('property', target, {
+ *   // Displayed name
+ *   name: "My Custom Name",
+ *   // If `target['property']` change, the controller will be updated
+ *   listen: true
+ * })
+ * ```
+ *
+ * ## Deal with events
+ *
+ * Three kinds of events are emitted by all the controllers
+ * - `input` : Trigger when an `input` event is trigger by an `HTMLInputElement`
+ * - `change` : Trigger when an `change` event is trigger by an `HTMLInputElement`
+ * - `update` : Trigger when a modification is made on the target property. It's the most common way to use `data-gui`
+ *
+ * ### Listen to event
+ *
+ * #### Method one
+ * ``` javascript
+ * myController.on('update', (newValue) => console.log(newValue))
+ * ```
+ *
+ * #### Method two (using `web-component` and `CustomEvent`)
+ * ``` javascript
+ * myController.addEventListener('update', ({ detail }) => console.log(detail))
+ * ```
+ *
+ * ### Remove listener
+ * You can use either `off` or `removeEventListener` to do so.
+ */
 export class BaseController extends WebComponent {
-  @property() name: string
-  @property() property: string
-  @property() target: Object
-  @property() value: any
+  /**
+   * If true, the controller value will be updated automatically if `target` object is modified.
+   * *Carefull: heavy use may reduce performance*
+   * ``` javascript
+   * group.add('someProperty', target, { listen: true })
+   * ```
+   */
   listen: boolean = false
-  listenCallback: Function
+
+  /**
+   * If true, the controller will not be editable
+   */
+  disabled: boolean = false
+
+  /**
+   * Display name of a controller, defaultly equal to `property`.
+   * ``` javascript
+   * group.add('someProperty', target, { name: 'Custom display name' })
+   * ```
+   */
+  @property() name: string
+
+  /**
+   * property controlled in the target object
+   */
+  @property() property: string
+
+  /**
+   * source object in which the property key is defined
+   */
+  @property() target: Object
+
+  /**
+   * @ignore
+   */
+  @property() protected value: any
+
   parent: BaseGroup
+  private listenCallback: Function
 
-  // public on(eventName: string, callback: Function) {}
-  // public off(eventName: string, callback: Function) {}
-  // public once(eventName: string, callback: Function) {}
-  // public emit(eventName: string, datas: any) {}
+  public constructor(parameters: ControllerConstructor)
+  constructor({
+    name = null,
+    listen = false,
+    property = null,
+    target = null,
+    parent = null,
+    disabled = false,
+  }: ControllerConstructor = {}) {
+    super()
+    this.parent = parent
+    this.property = property
+    this.target = target
+    this.name = name ? name : this.property
+    this.value = this.target[this.property]
+    this.listen = listen
+    this.disabled = disabled
+  }
 
+  /**
+   * @ignore
+   */
+  connectedCallback() {
+    super.connectedCallback()
+    this.listenCallback = () => this.forceUpdate()
+    if (this.listen) {
+      raf.addTick(this.listenCallback)
+    }
+  }
+
+  /**
+   * @ignore
+   */
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    if (this.listen) {
+      console.log('removeTick', this.name)
+      raf.removeTick(this.listenCallback)
+    }
+  }
+
+  /**
+   * Manually update controller value in the form if `target` has changed
+   */
+  forceUpdate() {
+    if (this.target[this.property] !== this.value) {
+      this.value = this.target[this.property]
+    }
+  }
+
+  /**
+   * Delete the controller
+   */
+  destroy() {
+    this.parent.delete(this)
+  }
+
+  /**
+   * Add a controller in the same `Group` of current controller
+   */
+  add(property: string, target: Object = undefined, params: any = undefined) {
+    this.parent.add(property, target, params)
+  }
+
+  protected set(value: any) {
+    this.value = this.validate(value)
+    this.target[this.property] = this.value
+    this.emit('update', this.value)
+    this.dispatchEvent(new CustomEvent('update', { detail: this.value }))
+  }
+
+  protected onInput(event) {
+    this.emit('input', this.value)
+    this.dispatchEvent(new CustomEvent('input', { detail: this.value }))
+  }
+
+  protected onChange(event) {
+    this.emit('change', this.value)
+    this.dispatchEvent(new CustomEvent('change', { detail: this.value }))
+  }
+
+  protected validate(value: any): any {
+    return value
+  }
+
+  /**
+   * @ignore
+   */
+  static isCompatible(
+    value: any,
+    property: string = undefined,
+    params: any = undefined,
+  ): boolean {
+    return true
+  }
+
+  valueOf() {
+    return this.value
+  }
+
+  /**
+   * @ignore
+   */
   public static styles = css`
     /*minify*/
     :host {
@@ -86,78 +260,4 @@ export class BaseController extends WebComponent {
       line-height: inherit;
     }
   `
-  public constructor(parameters: ControllerConstructor)
-  constructor({
-    name = null,
-    listen = false,
-    property = null,
-    target = null,
-    parent = null,
-  }: ControllerConstructor = {}) {
-    super()
-    this.parent = parent
-    this.property = property
-    this.target = target
-    this.name = name ? name : this.property
-    this.value = this.target[this.property]
-    this.listen = listen
-  }
-
-  connectedCallback() {
-    super.connectedCallback()
-    this.listenCallback = () => {
-      if (this.target[this.property] !== this.value) {
-        this.value = this.target[this.property]
-      }
-    }
-    if (this.listen) {
-      console.log('addTick', this.name)
-      raf.addTick(this.listenCallback)
-    }
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback()
-    if (this.listen) {
-      console.log('removeTick', this.name)
-      raf.removeTick(this.listenCallback)
-    }
-  }
-
-  destroy() {
-    this.parent.delete(this)
-  }
-
-  protected set(value: any) {
-    this.value = this.validate(value)
-    this.target[this.property] = this.value
-    this.emit('update', this.value)
-    this.dispatchEvent(new CustomEvent('update', { detail: this.value }))
-  }
-
-  protected onInput(event) {
-    this.emit('input', this.value)
-    this.dispatchEvent(new CustomEvent('input', { detail: this.value }))
-  }
-
-  protected onChange(event) {
-    this.emit('change', this.value)
-    this.dispatchEvent(new CustomEvent('change', { detail: this.value }))
-  }
-
-  protected validate(value: any): any {
-    return value
-  }
-
-  static isCompatible(
-    value: any,
-    property: string = undefined,
-    params: any = undefined,
-  ): boolean {
-    return true
-  }
-
-  valueOf() {
-    return this.value
-  }
 }

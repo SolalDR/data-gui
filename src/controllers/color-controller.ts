@@ -7,73 +7,61 @@ interface ColorControllerConstructor extends ControllerConstructor {
   name?: string
 }
 
+/**
+ * ColorController is the controller used to handle all different kind of colors.<br>
+ * It can take a lot of different format (HSL, RGB, HEX) and types (string, object, number)<br>
+ * This controller is build to keep the same input and output formats. <br>
+ * ## How to use
+ * ``` javascript
+ * const target = {
+ *   colorHSL: { h: 1, s: 1, l: 1 },
+ *   colorHSLA: { h: 1, s: 1, l: 1, a: 0.4 },
+ *   colorHEX: "#FFFFFF",
+ *   colorHEX2: 0xFFFFFF,
+ *   colorRGB: {r: 1, g: 244, b: 1},
+ *   colorRGBA: {r: 1, g: 244, b: 1, a: 0.5},
+ *   colorRGBA: "rgba(255, 244, 122, 0.5)"
+ * }
+ *
+ * // Method 1
+ * group.add('colorHSL', target, {
+ *   type: "color"
+ * }).on('update', (hslObject) => {
+ *   console.log(hslObject.h)
+ * })
+ *
+ * // Method 2
+ * group.color('colorRGBA', target).on('update', (rgbaString) => {
+ *   myElement.style.color = rgbaString
+ * })
+ * ```
+ *
+ * For more information about options or events see {@link BaseController}
+ */
 @customElement('gui-color-controller')
 export class ColorController extends BaseController {
-  color: Color
-  inputValue: string
-  labelValue: string
-  @property() name: string
-  @query('input') input: HTMLElement
-
-  public static styles = css`
-    /*minify*/
-    ${BaseController.styles}
-    .input-color {
-      max-width: 20px;
-      height: 100%;
-    }
-
-    .input-color span {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-      background-color: var(--value);
-      display: block;
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-    }
-
-    .input-color input {
-      --value-attr: attr('value');
-      width: 100%;
-      /* width: 20px; */
-      border: 0;
-      border-radius: 10px;
-      padding: 0;
-      opacity: 0;
-    }
-
-    .input-channel {
-      min-width: 32px;
-      max-width: 32px;
-    }
-
-    .input-channel[label='A'] {
-      min-width: 40px;
-      max-width: 40px;
-    }
-
-    .right {
-      justify-content: flex-start;
-      flex-direction: row;
-    }
-
-    gui-input {
-      max-width: 50px;
-      margin-left: 5px;
-    }
-  `
+  /**
+   * @ignore
+   */
+  @query('input') input: HTMLInputElement
+  private color: Color
+  private inputValue: string
+  private labelValue: string
 
   constructor(parameters: ColorControllerConstructor) {
     super(parameters)
   }
 
+  /**
+   * @ignore
+   */
   firstUpdated() {
     this.input.setAttribute('value', this.color.getHexString())
   }
 
+  /**
+   * @ignore
+   */
   connectedCallback() {
     this.color = new Color(this.value)
     this.updateInputValue()
@@ -84,7 +72,10 @@ export class ColorController extends BaseController {
     return value
   }
 
-  static isCompatible(value: unknown): boolean {
+  /**
+   * @ignore
+   */
+  static isCompatible(value: unknown, _: string, __: any): boolean {
     return isColor(value)
   }
 
@@ -130,10 +121,14 @@ export class ColorController extends BaseController {
     this.updateInputValue()
   }
 
+  /**
+   * @ignore
+   */
   render() {
     const alpha = this.color.alphaEnabled
       ? html`
           <gui-input
+            step="0.01"
             class="input-channel"
             .value=${String(this.color.a)}
             label="A"
@@ -201,4 +196,58 @@ export class ColorController extends BaseController {
       </div>
     `
   }
+
+  /**
+   * @ignore
+   */
+  public static styles = css`
+    /*minify*/
+    ${BaseController.styles}
+    .input-color {
+      max-width: 20px;
+      height: 100%;
+    }
+
+    .input-color span {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background-color: var(--value);
+      display: block;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .input-color input {
+      --value-attr: attr('value');
+      width: 100%;
+      /* width: 20px; */
+      border: 0;
+      border-radius: 10px;
+      padding: 0;
+      opacity: 0;
+    }
+
+    .input-channel {
+      min-width: 32px;
+      max-width: 32px;
+    }
+
+    .input-channel[label='A'] {
+      min-width: 40px;
+      max-width: 40px;
+    }
+
+    .right {
+      justify-content: flex-start;
+      flex-direction: row;
+    }
+
+    gui-input {
+      max-width: 50px;
+      margin-left: 5px;
+    }
+  `
 }

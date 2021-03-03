@@ -1,15 +1,87 @@
 import { html, property, customElement, css, query } from 'lit-element'
-import { BaseGroup, GroupConstructor } from '@/group'
+import { BaseGroup, GroupConstructor as BaseGroupConstructor } from '@/group'
 
+interface GroupConstructor extends BaseGroupConstructor {
+  opened?: boolean
+}
 @customElement('gui-group')
 export class Group extends BaseGroup {
-  @property() name: string
-  @property() computedClass: string = ''
-  @property() computedStyle: string = ''
-  @property() opened: boolean = false
+  /**
+   * @ignore
+   */
+  @property() private computedClass: string = ''
+  /**
+   * @ignore
+   */
+  @property() private computedStyle: string = ''
 
-  @query('.group-body') groupElement: HTMLElement
+  /**
+   * @ignore
+   */
+  @query('.group-body') private groupElement: HTMLElement
 
+  constructor({ name = null, opened = true }: GroupConstructor = {}) {
+    super({ name })
+    this.opened = opened
+  }
+
+  private onClick() {
+    this.opened = !this.opened
+  }
+
+  /**
+   * Create a new child group
+   */
+  group(descriptor: GroupConstructor) {
+    const group = new Group(descriptor)
+    group.addEventListener('collapse', event => {
+      this.updateComputed()
+    })
+    this.childrenControllers.push(group)
+    return group
+  }
+
+  private updateComputed() {
+    this.computedClass = this.opened ? 'group group--open' : 'group'
+    const height = this.groupElement
+      ? this.groupElement.offsetHeight + 40
+      : 1000
+    this.computedStyle = `--group-height: ${height}px;`
+  }
+
+  /**
+   * @ignore
+   */
+  render() {
+    this.updateComputed()
+    return html`
+      <div class=${this.computedClass} style=${this.computedStyle}>
+        <p class="group-header" @click=${this.onClick}>
+          <span>${this.name}</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#000000"
+            strokeWidth="5"
+            strokeLinecap="square"
+            strokeLinejoin="arcs"
+          >
+            <path d="M18 15l-6-6-6 6" />
+          </svg>
+        </p>
+        <div class="group-body">
+          ${this.childrenControllers}
+        </div>
+      </div>
+    `
+  }
+
+  /**
+   * @ignore
+   */
   public static styles = css`
     /*minify*/
     ${BaseGroup.styles} :host {
@@ -59,61 +131,4 @@ export class Group extends BaseGroup {
       transform: translateY(-50%) rotate(0deg);
     }
   `
-
-  constructor({ name = null }: GroupConstructor = {}) {
-    super({ name })
-  }
-
-  onClick() {
-    this.opened = !this.opened
-    this.dispatchEvent(
-      new CustomEvent('collapse', {
-        detail: this.opened,
-      }),
-    )
-  }
-
-  group(descriptor: GroupConstructor) {
-    const group = new Group(descriptor)
-    group.addEventListener('collapse', event => {
-      this.updateComputed()
-    })
-    this.childrenControllers.push(group)
-    return group
-  }
-
-  updateComputed() {
-    this.computedClass = this.opened ? 'group group--open' : 'group'
-    const height = this.groupElement
-      ? this.groupElement.offsetHeight + 40
-      : 1000
-    this.computedStyle = `--group-height: ${height}px;`
-  }
-
-  render() {
-    this.updateComputed()
-    return html`
-      <div class=${this.computedClass} style=${this.computedStyle}>
-        <p class="group-header" @click=${this.onClick}>
-          <span>${this.name}</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#000000"
-            strokeWidth="5"
-            strokeLinecap="square"
-            strokeLinejoin="arcs"
-          >
-            <path d="M18 15l-6-6-6 6" />
-          </svg>
-        </p>
-        <div class="group-body">
-          ${this.childrenControllers}
-        </div>
-      </div>
-    `
-  }
 }

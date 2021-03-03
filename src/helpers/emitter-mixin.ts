@@ -5,7 +5,10 @@ type Constructor = new (...args: any[]) => {}
 
 export function Emitter<TBase extends Constructor>(Base: TBase) {
   return class Emitter extends Base {
-    // Map of string containing a list of callback
+    /**
+     * Map of string containing a list of callback
+     * @private
+     */
     _emitterEvents = new Map<string, Map<Symbol, Function>>()
 
     on(eventName: string, callback: Function) {
@@ -18,6 +21,7 @@ export function Emitter<TBase extends Constructor>(Base: TBase) {
 
     /**
      * Trigger the callbacks registered for a given event
+     * @ignore
      */
     emit(eventName: string | string[], ...datas) {
       var eventList = eventName instanceof Array ? eventName : [eventName]

@@ -4,29 +4,42 @@ import '@/components/elements/button'
 
 interface ActionControllerConstructor extends ControllerConstructor {}
 
+/**
+ * ActionController is a controller used to trigger JS functions
+ * ## How to use
+ * ``` javascript
+ * const callback = (a, b) => {
+ *   return a + b
+ * }
+ * const target = { action: callback }
+ *
+ * // Method 1
+ * const action = group.action(callback, { args: [1, 2] })
+ *
+ * // Method 2
+ * action = group.add('action', target, { args: [1, 2] })
+ *
+ * // Manually trigger action
+ * action.run()
+ * ```
+ *
+ * For more information about basic use see {@link BaseController}
+ */
 @customElement('gui-action-controller')
 export class ActionController extends BaseController {
-  @property() name: string
   args: Array<ControllerConstructor> = []
 
-  public static styles = css`
-    /*minify*/
-    ${BaseController.styles}
-    .right > gui-button {
-      flex: none;
-      display: inline-block;
-    }
-  `
-
+  /**
+   * @ignore
+   */
   constructor(parameters: ActionControllerConstructor) {
     super(parameters)
   }
 
-  protected validate(value: string) {
-    return value
-  }
-
-  static isCompatible(value: unknown): boolean {
+  /**
+   * @ignore
+   */
+  static isCompatible(value: unknown, _: string, __: any): boolean {
     return typeof value === 'function'
   }
 
@@ -39,10 +52,16 @@ export class ActionController extends BaseController {
     this.set(event.target.value)
   }
 
+  /**
+   * Execute the action
+   */
   run() {
     this.value(...this.args)
   }
 
+  /**
+   * @ignore
+   */
   render() {
     return html`
       <div>
@@ -53,4 +72,16 @@ export class ActionController extends BaseController {
       </div>
     `
   }
+
+  /**
+   * @ignore
+   */
+  public static styles = css`
+    /*minify*/
+    ${BaseController.styles}
+    .right > gui-button {
+      flex: none;
+      display: inline-block;
+    }
+  `
 }

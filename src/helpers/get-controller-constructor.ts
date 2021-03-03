@@ -11,9 +11,14 @@ export default (value: unknown, property: string, params: any) => {
     return SelectController
   if (ImageController.isCompatible(value, property, params))
     return ImageController
-  if (NumberController.isCompatible(value)) return NumberController
-  if (ColorController.isCompatible(value)) return ColorController
-  if (TextController.isCompatible(value)) return TextController
-  if (ActionController.isCompatible(value)) return ActionController
-  if (BooleanController.isCompatible(value)) return BooleanController
+  if (NumberController.isCompatible(value, property, params))
+    return NumberController
+  if (ColorController.isCompatible(value, property, params))
+    return ColorController
+  if (TextController.isCompatible(value, property, params))
+    return TextController
+  if (ActionController.isCompatible(value, property, params))
+    return ActionController
+  if (BooleanController.isCompatible(value, property, params))
+    return BooleanController
 }

@@ -1,20 +1,72 @@
 import { html, property, customElement, css } from 'lit-element'
 import { BaseGroup, GroupConstructor } from '@/group'
+import { BaseController } from '@/controller'
 import { Group } from '@/components/group'
 
 interface GUIConstructor {
   position?: string
-  target?: HTMLElement
+  parent?: HTMLElement
   name?: string
   theme?: string
+  target?: Object
+  children?: Array<BaseGroup | BaseController>
 }
 
 @customElement('gui-root')
-class GUI extends Group {
+export class GUI extends Group {
   @property() name: string
   @property({ type: String, reflect: true }) theme: string
   @property({ type: String, reflect: true }) public position?: string
 
+  constructor({
+    position = 'top right',
+    theme = 'light',
+    parent = document.body,
+    name = '',
+    target = {},
+    children = [],
+  }: GUIConstructor = {}) {
+    super({ name, children, target })
+
+    this.position = position
+    this.theme = theme
+    this.target = target
+
+    if (parent) {
+      parent.appendChild(this)
+    }
+  }
+
+  group(descriptor: GroupConstructor) {
+    const group = new Group(descriptor)
+    this.childrenControllers.push(group)
+    return group
+  }
+
+  /**
+   * @ignore
+   */
+  render() {
+    const title =
+      this.name === ''
+        ? ''
+        : html`
+            <span>${this.name}</span>
+          `
+    return html`
+      <div class="${this.position}">
+        ${title}
+        <div>${this.childrenControllers}</div>
+        <!-- <button class="close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="square" stroke-linejoin="arcs"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button> -->
+      </div>
+    `
+  }
+
+  /**
+   * @ignore
+   */
   public static styles = css`
     /*minify*/
     ${BaseGroup.styles} :host {
@@ -89,46 +141,4 @@ class GUI extends Group {
       left: 10%;
     }
   `
-
-  constructor({
-    position = 'top right',
-    theme = 'light',
-    target = document.body,
-    name = '',
-  }: GUIConstructor = {}) {
-    super({ name })
-
-    this.position = position
-    this.theme = theme
-
-    if (target) {
-      target.appendChild(this)
-    }
-  }
-
-  group(descriptor: GroupConstructor) {
-    const group = new Group(descriptor)
-    this.childrenControllers.push(group)
-    return group
-  }
-
-  render() {
-    const title =
-      this.name === ''
-        ? ''
-        : html`
-            <span>${this.name}</span>
-          `
-    return html`
-      <div class="${this.position}">
-        ${title}
-        <div>${this.childrenControllers}</div>
-        <!-- <button class="close">
-          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="square" stroke-linejoin="arcs"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button> -->
-      </div>
-    `
-  }
 }
-
-export default GUI

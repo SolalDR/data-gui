@@ -1,11 +1,83 @@
 import { html, property, customElement, css, query } from 'lit-element'
 import { BaseController, ControllerConstructor } from '../controller'
 
+/**
+ * ## How to use
+ * ``` javascript
+ * const target = { property: false }
+ * group.add('property', target)
+ * ```
+ *
+ * For more information about options or events see {@link BaseController}
+ */
 @customElement('gui-boolean-controller')
 export class BooleanController extends BaseController {
-  @property() name: string
+  /**
+   * @ignore
+   */
   @query('input') input: HTMLInputElement
 
+  /**
+   * @ignore
+   */
+  constructor(parameters: ControllerConstructor) {
+    super(parameters)
+  }
+
+  /**
+   * @ignore
+   */
+  static isCompatible(value: unknown, _: string, __: any): boolean {
+    return typeof value === 'number' || typeof value === 'boolean'
+  }
+
+  /**
+   * @override
+   * Validate and format the value
+   */
+  protected validate(value: boolean): boolean {
+    return !!value
+  }
+
+  /**
+   * @override
+   */
+  protected onChange(event) {
+    this.set(Boolean(event.target.checked))
+    super.onChange(event)
+    super.onInput(event)
+    this.input.checked = this.value
+  }
+
+  /**
+   * @ignore
+   */
+  render() {
+    return html`
+      <div>
+        <label>${this.name}</label>
+        <div class="right">
+          <input
+            .disabled=${this.disabled}
+            .value=${this.value}
+            .checked=${this.value}
+            type="checkbox"
+            @change=${event => {
+              this.onChange(event)
+            }}
+          />
+          <span
+            .data-checked=${this.value ? '1' : '2'}
+            class="customCheckbox"
+          ></span>
+        </div>
+      </div>
+    `
+  }
+
+  /**
+   * @ignore
+   */
   public static styles = css`
     /*minify*/
     ${BaseController.styles}
@@ -29,52 +101,4 @@ export class BooleanController extends BaseController {
       background: var(--color-primary);
     }
   `
-
-  constructor(parameters: ControllerConstructor) {
-    super(parameters)
-  }
-
-  static isCompatible(value: unknown): boolean {
-    return typeof value === 'number' || typeof value === 'boolean'
-  }
-
-  /**
-   * @override
-   * Validate and format the value
-   */
-  protected validate(value: boolean): boolean {
-    return !!value
-  }
-
-  /**
-   * @override
-   */
-  protected onChange(event) {
-    this.set(Boolean(event.target.checked))
-    super.onChange(event)
-    super.onInput(event)
-    this.input.checked = this.value
-  }
-
-  render() {
-    return html`
-      <div>
-        <label>${this.name}</label>
-        <div class="right">
-          <input
-            .value=${this.value}
-            .checked=${this.value}
-            type="checkbox"
-            @change=${event => {
-              this.onChange(event)
-            }}
-          />
-          <span
-            .data-checked=${this.value ? '1' : '2'}
-            class="customCheckbox"
-          ></span>
-        </div>
-      </div>
-    `
-  }
 }

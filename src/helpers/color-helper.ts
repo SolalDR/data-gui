@@ -192,7 +192,7 @@ class Color {
             this.g = Math.min(255, parseInt(color[2], 10)) / 255
             this.b = Math.min(255, parseInt(color[3], 10)) / 255
             if (color[4]) {
-              this.setAlpha(parseInt(color[4]))
+              this.setAlpha(parseFloat(color[4]))
             }
 
             return this
