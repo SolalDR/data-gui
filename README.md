@@ -1,7 +1,9 @@
 # data-gui
 
-A scalable and very lightweight user interface to tweak variables in JS.
-This tool is a modern alternative to Dat.GUI using webcomponents.
+[![build](https://github.com/SolalDR/data-gui/actions/workflows/build.yml/badge.svg)](https://github.com/SolalDR/data-gui/actions/workflows/build.yml)
+
+*A scalable and lightweight (~50kb) user interface to tweak variables in JS.
+This tool is a modern alternative to Dat.GUI using webcomponents.*
 
 ## Features
 - Control several types of data (`number`, `string`, `blob`, `boolean`, `function`, `color`)
