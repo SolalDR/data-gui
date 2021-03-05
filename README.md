@@ -28,10 +28,6 @@ yarn add data-gui
 
 ### Basic use
 
-<div class="c">
-
-<div style="flex: 1;">
-
 ```javascript
 // See result below 
 import GUI from 'data-gui'
@@ -57,18 +53,11 @@ g.add('b', target, { choices: ["Jonh", "Foo", "Bar"] })
 g.add('c', target, { name: "Custom name C"})
 ```
 
-</div>
-<div style="flex: 1;"><img src="./public/light.png"/></div>
-</div>
+<img src="./public/light.png" width="300"/>
 
 Consult [controller documentation](https://solaldr.github.io/data-gui/classes/basecontroller.html) for more information
 
 ### GUI Configuration
-
-<div class="c">
-
-<div style="flex: 1">
-
 
 ```javascript
 const gui = new GUI({
@@ -79,9 +68,8 @@ gui.add('width', target, { min: 0, max: 500 })
 gui.add('height', target, { min: 0, max: 500 })
 ```
 
-</div>
-<div style="flex: 1;"><img src="./public/dark-with-name2.png"/></div>
-</div>
+</p>
+<img src="./public/dark-with-name2.png" width="300"/>
 
 Consult [GUI page](https://solaldr.github.io/data-gui/classes/gui.html) in the documentation for more information
 
@@ -91,14 +79,3 @@ Consult [GUI page](https://solaldr.github.io/data-gui/classes/gui.html) in the d
 ## License
 
 [MIT](LICENSE).
-
-
-<style>
-  img {
-    margin-left: 10px;
-    max-width: 300px;
-  }
-  .c {
-    display: flex;
-  }
-</style>
