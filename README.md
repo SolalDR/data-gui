@@ -2,8 +2,7 @@
 
 [![build](https://github.com/SolalDR/data-gui/actions/workflows/build.yml/badge.svg)](https://github.com/SolalDR/data-gui/actions/workflows/build.yml)
 [![status: experimental](https://github.com/GIScience/badges/raw/master/status/experimental.svg)](https://github.com/GIScience/badges#experimental)
-[![Version Badge](http://versionbadg.es/SolalDR/data-gui.svg)](https://npmjs.org/package/data-gui)</sup>
-
+[![version](https://img.shields.io/github/package-json/v/SolalDR/data-gui)](https://github.com/SolalDR/data-gui)
 
 
 *The aim of `data-gui` is to create a scalable and lightweight user interface to tweak variables in JS.
