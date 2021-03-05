@@ -1,2 +1,4 @@
 exclude_patterns:
   - src/helpers/color-helper.ts
+  - rollup.config.js
+  - minify-css-template.js
