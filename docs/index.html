@@ -60,28 +60,90 @@
 					<h1>data-gui</h1>
 				</a>
 				<p><a href="https://github.com/SolalDR/data-gui/actions/workflows/build.yml"><img src="https://github.com/SolalDR/data-gui/actions/workflows/build.yml/badge.svg" alt="build"></a></p>
-				<p><em>A scalable and lightweight (~50kb) user interface to tweak variables in JS.
+				<p><em>The aim of <code>data-gui</code> is to create a scalable and lightweight user interface to tweak variables in JS.
 				This tool is a modern alternative to Dat.GUI using webcomponents.</em></p>
-				<p>See documentation <a href="https://solaldr.github.io/data-gui/index.html">here</a><br>
-				Try demo <a href="https://data-gui.netlify.app">here</a><br></p>
+				<p><a href="https://solaldr.github.io/data-gui/index.html">Documentation</a> — <a href="https://data-gui.netlify.app">Demo</a><br></p>
 				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
 					<h2>Features</h2>
 				</a>
 				<ul>
-					<li>Control several types of data (<code>number</code>, <code>string</code>, <code>blob</code>, <code>boolean</code>, <code>function</code>, <code>color</code>)</li>
-					<li>Automatically listen to outside changes and perform GUI updates</li>
+					<li><input checked="" disabled="" type="checkbox"> Control several types of data (<code>number</code>, <code>string</code>, <code>blob</code>, <code>boolean</code>, <code>function</code>, <code>color</code>)</li>
+					<li><input checked="" disabled="" type="checkbox"> Automatically listen to outside changes and perform GUI updates</li>
+					<li><input checked="" disabled="" type="checkbox"> Customize styles with CSS variables</li>
 					<li>Create custom controller</li>
-					<li>Customize styles with CSS variables</li>
+					<li>Save or share your preset</li>
 				</ul>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
 				</a>
-				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">i</span><span style="color: #000000"> </span><span style="color: #001080">data</span><span style="color: #000000">-</span><span style="color: #001080">gui</span>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">i</span><span style="color: #000000"> </span><span style="color: #001080">data</span><span style="color: #000000">-</span><span style="color: #001080">gui</span><span style="color: #000000"> --</span><span style="color: #001080">save</span>
 </code></pre>
+				<pre><code><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">add</span><span style="color: #000000"> </span><span style="color: #001080">data</span><span style="color: #000000">-</span><span style="color: #001080">gui</span>
+</code></pre>
+				<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
+					<h2>How to use</h2>
+				</a>
+				<a href="#basic-use" id="basic-use" style="color: inherit; text-decoration: none;">
+					<h3>Basic use</h3>
+				</a>
+				<div class="c">
+					<div style="flex: 1;">
+						<pre><code class="language-javascript"><span style="color: #008000">// See result below </span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">GUI</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;data-gui&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">target</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">a:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">b:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Jonh&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">c:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;rgba(0, 0, 0, 0.5)&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">d:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #795E26">e</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">alert</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Hello E&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">gui</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GUI</span><span style="color: #000000">()</span>
+<span style="color: #001080">gui</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;a&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">)</span>
+<span style="color: #001080">gui</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;b&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">)</span>
+<span style="color: #001080">gui</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;c&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">)</span>
+<span style="color: #001080">gui</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;d&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">)</span>
+<span style="color: #001080">gui</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;e&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">)</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">g</span><span style="color: #000000"> = </span><span style="color: #001080">gui</span><span style="color: #000000">.</span><span style="color: #795E26">group</span><span style="color: #000000">({ </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;With options&#039;</span><span style="color: #000000"> })</span>
+<span style="color: #001080">g</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;a&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">, { </span><span style="color: #001080">min:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">max:</span><span style="color: #000000"> </span><span style="color: #098658">100</span><span style="color: #000000">, </span><span style="color: #001080">step:</span><span style="color: #000000"> </span><span style="color: #098658">0.1</span><span style="color: #000000"> })</span>
+<span style="color: #001080">g</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;b&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">, { </span><span style="color: #001080">choices:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;Jonh&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;Foo&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;Bar&quot;</span><span style="color: #000000">] })</span>
+<span style="color: #001080">g</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;c&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">, { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Custom name C&quot;</span><span style="color: #000000">})</span>
+</code></pre>
+					</div>
+					<div style="flex: 1;"><img src="./public/light.png"/></div>
+				</div>
+				<p>Consult <a href="https://solaldr.github.io/data-gui/classes/basecontroller.html">controller documentation</a> for more information</p>
+				<a href="#gui-configuration" id="gui-configuration" style="color: inherit; text-decoration: none;">
+					<h3>GUI Configuration</h3>
+				</a>
+				<div class="c">
+					<div style="flex: 1">
+						<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">gui</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GUI</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Custom name&quot;</span>
+<span style="color: #000000">  </span><span style="color: #001080">theme</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;dark&quot;</span>
+<span style="color: #000000">}) </span>
+<span style="color: #001080">gui</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;width&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">, { </span><span style="color: #001080">min:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">max:</span><span style="color: #000000"> </span><span style="color: #098658">500</span><span style="color: #000000"> })</span>
+<span style="color: #001080">gui</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;height&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">, { </span><span style="color: #001080">min:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">max:</span><span style="color: #000000"> </span><span style="color: #098658">500</span><span style="color: #000000"> })</span>
+</code></pre>
+					</div>
+					<div style="flex: 1;"><img src="./public/dark-with-name2.png"/></div>
+				</div>
+				<p>Consult <a href="https://solaldr.github.io/data-gui/classes/gui.html">GUI page</a> in the documentation for more information</p>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
 					<h2>License</h2>
 				</a>
 				<p><a href="LICENSE">MIT</a>.</p>
+				<style>
+  img {
+    margin-left: 10px;
+    max-width: 300px;
+  }
+  .c {
+    display: flex;
+  }
+</style>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

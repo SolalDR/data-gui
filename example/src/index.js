@@ -24,7 +24,7 @@ const target = {
 /**
  * GUI
  */
-const a = new GUI({ target });
+const a = new GUI({ target, theme: "dark" });
 a.add('width', target, { min: 10, max: 500 })
 a.add('height', target, { min: 10, max: 500 })
 a.add('count', target, { min: 10, max: 500, range: false })

@@ -117,28 +117,5 @@ export class GUI extends Group {
     :host([position~='left']) {
       left: var(--offset);
     }
-
-    span {
-      border-top-right-radius: var(--radius);
-      border-top-left-radius: var(--radius);
-    }
-
-    button {
-      position: absolute;
-      top: 0;
-      right: 100%;
-      border: 0;
-      width: 20px;
-      height: 20px;
-      background-color: var(--color-primary);
-      color: white;
-    }
-    button.close svg {
-      width: 80%;
-      height: 80%;
-      position: absolute;
-      top: 10%;
-      left: 10%;
-    }
   `
 }

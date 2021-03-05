@@ -67,15 +67,6 @@
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p><code>BaseController</code> is the common class used by all others controllers.</p>
-						<ul>
-							<li><a href="actioncontroller.html">ActionController</a></li>
-							<li><a href="booleancontroller.html">BooleanController</a></li>
-							<li><a href="colorcontroller.html">ColorController</a></li>
-							<li><a href="imagecontroller.html">ImageController</a></li>
-							<li><a href="numbercontroller.html">NumberController</a></li>
-							<li><a href="selectcontroller.html">SelectController</a></li>
-							<li><a href="textcontroller.html">TextController</a></li>
-						</ul>
 					</div>
 					<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
 						<h2>How to use</h2>
@@ -84,8 +75,10 @@
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">controller</span><span style="color: #000000"> = </span><span style="color: #001080">group</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;property&#039;</span><span style="color: #000000">, </span><span style="color: #001080">target</span><span style="color: #000000">, {</span>
 <span style="color: #000000">  </span><span style="color: #008000">// Displayed name</span>
 <span style="color: #000000">  </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;My Custom Name&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #008000">// If `target[&#039;property&#039;]` change, the controller will be updated</span>
+<span style="color: #000000">  </span><span style="color: #008000">// If target change, the controller will be updated (default is false)</span>
 <span style="color: #000000">  </span><span style="color: #001080">listen:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">  </span><span style="color: #008000">// Disabled the input, usefull for read only variable</span>
+<span style="color: #000000">  </span><span style="color: #001080">disabled</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
 <span style="color: #000000">})</span>
 </code></pre>
 					<a href="#deal-with-events" id="deal-with-events" style="color: inherit; text-decoration: none;">
@@ -200,7 +193,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L100">controller.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L95">controller.ts:95</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -222,7 +215,7 @@
 					<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L74">controller.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L69">controller.ts:69</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -237,7 +230,7 @@
 					<div class="tsd-signature tsd-kind-icon">listen<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L69">controller.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L64">controller.ts:64</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -255,7 +248,7 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L82">controller.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L77">controller.ts:77</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -272,7 +265,7 @@
 					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <a href="basegroup.html" class="tsd-signature-type" data-tsd-kind="Class">BaseGroup</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L99">controller.ts:99</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L94">controller.ts:94</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -282,7 +275,7 @@
 					<div class="tsd-signature tsd-kind-icon">property<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L87">controller.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L82">controller.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -297,7 +290,7 @@
 					<div class="tsd-signature tsd-kind-icon">target<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L92">controller.ts:92</a></li>
+							<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L87">controller.ts:87</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -319,7 +312,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L162">controller.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L157">controller.ts:157</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -353,7 +346,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L155">controller.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L150">controller.ts:150</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -375,7 +368,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L146">controller.ts:146</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L141">controller.ts:141</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -397,7 +390,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/helpers/emitter-mixin.ts#L56">helpers/emitter-mixin.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/helpers/emitter-mixin.ts#L56">helpers/emitter-mixin.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -428,7 +421,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/helpers/emitter-mixin.ts#L14">helpers/emitter-mixin.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/helpers/emitter-mixin.ts#L14">helpers/emitter-mixin.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -454,7 +447,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/helpers/emitter-mixin.ts#L43">helpers/emitter-mixin.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/helpers/emitter-mixin.ts#L43">helpers/emitter-mixin.ts:43</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -485,7 +478,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/f34b756/src/controller.ts#L198">controller.ts:198</a></li>
+									<li>Defined in <a href="https://github.com/SolalDR/gui/blob/39af6c6/src/controller.ts#L193">controller.ts:193</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>

@@ -17,13 +17,6 @@ export interface ControllerConstructor {
 
 /**
  * `BaseController` is the common class used by all others controllers.
- * - {@link ActionController}
- * - {@link BooleanController}
- * - {@link ColorController}
- * - {@link ImageController}
- * - {@link NumberController}
- * - {@link SelectController}
- * - {@link TextController}
  *
  * ## How to use
  * ```javascript
@@ -31,8 +24,10 @@ export interface ControllerConstructor {
  * const controller = group.add('property', target, {
  *   // Displayed name
  *   name: "My Custom Name",
- *   // If `target['property']` change, the controller will be updated
+ *   // If target change, the controller will be updated (default is false)
  *   listen: true
+ *   // Disabled the input, usefull for read only variable
+ *   disabled: true
  * })
  * ```
  *
