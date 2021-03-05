@@ -8,7 +8,8 @@
 
 *The aim of `data-gui` is to create a scalable and lightweight user interface to tweak variables in JS.*
 
-[Documentation](https://solaldr.github.io/data-gui/index.html) — [Demo](https://data-gui.netlify.app)<br>
+[Documentation](https://solaldr.github.io/data-gui/index.html) — [Demo](https://data-gui.netlify.app) — [Source](https://github.com/SolalDR/data-gui)
+<br>
 
 ## Features
 - [x] Control several types of data (`number`, `string`, `blob`, `boolean`, `function`, `color`)
