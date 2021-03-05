@@ -1,6 +1,10 @@
 # data-gui
 
 [![build](https://github.com/SolalDR/data-gui/actions/workflows/build.yml/badge.svg)](https://github.com/SolalDR/data-gui/actions/workflows/build.yml)
+[![status: experimental](https://github.com/GIScience/badges/raw/master/status/experimental.svg)](https://github.com/GIScience/badges#experimental)
+[![Version Badge](http://versionbadg.es//SolalDR/data-gui.svg)](https://npmjs.org/package/data-gui)</sup>
+
+
 
 *The aim of `data-gui` is to create a scalable and lightweight user interface to tweak variables in JS.
 This tool is a modern alternative to Dat.GUI using webcomponents.*
@@ -28,6 +32,8 @@ yarn add data-gui
 
 ### Basic use
 
+<img src="./public/light.png" width="300" align="right"/>
+
 ```javascript
 // See result below 
 import GUI from 'data-gui'
@@ -53,11 +59,12 @@ g.add('b', target, { choices: ["Jonh", "Foo", "Bar"] })
 g.add('c', target, { name: "Custom name C"})
 ```
 
-<img src="./public/light.png" width="300"/>
 
 Consult [controller documentation](https://solaldr.github.io/data-gui/classes/basecontroller.html) for more information
 
 ### GUI Configuration
+
+<img src="./public/dark-with-name2.png" width="300" align="right"/>
 
 ```javascript
 const gui = new GUI({
@@ -69,7 +76,6 @@ gui.add('height', target, { min: 0, max: 500 })
 ```
 
 </p>
-<img src="./public/dark-with-name2.png" width="300"/>
 
 Consult [GUI page](https://solaldr.github.io/data-gui/classes/gui.html) in the documentation for more information
 
