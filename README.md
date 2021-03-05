@@ -1,6 +1,7 @@
 # data-gui
 
 [![build](https://github.com/SolalDR/data-gui/actions/workflows/build.yml/badge.svg)](https://github.com/SolalDR/data-gui/actions/workflows/build.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0e90a12eb9040d1865b0/maintainability)](https://codeclimate.com/github/SolalDR/data-gui/maintainability)
 [![status: experimental](https://github.com/GIScience/badges/raw/master/status/experimental.svg)](https://github.com/GIScience/badges#experimental)
 [![version](https://img.shields.io/github/package-json/v/SolalDR/data-gui)](https://github.com/SolalDR/data-gui)
 
