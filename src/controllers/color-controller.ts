@@ -214,6 +214,8 @@ export class ColorController extends BaseController {
       transform: translateY(-50%);
       width: 20px;
       height: 20px;
+      border: 1px solid var(--color-bg-secondary);
+      box-sizing: border-box;
       background-color: var(--value);
       display: block;
       border-radius: 10px;
