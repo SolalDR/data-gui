@@ -5,8 +5,7 @@
 [![version](https://img.shields.io/github/package-json/v/SolalDR/data-gui)](https://github.com/SolalDR/data-gui)
 
 
-*The aim of `data-gui` is to create a scalable and lightweight user interface to tweak variables in JS.
-This tool is a modern alternative to Dat.GUI using webcomponents.*
+*The aim of `data-gui` is to create a scalable and lightweight user interface to tweak variables in JS.*
 
 [Documentation](https://solaldr.github.io/data-gui/index.html) — [Demo](https://data-gui.netlify.app)<br>
 
@@ -16,6 +15,11 @@ This tool is a modern alternative to Dat.GUI using webcomponents.*
 - [x] Customize styles with CSS variables
 - [ ] Create custom controller
 - [ ] Save or share your preset
+
+## Dependencies
+
+- [LitElement](https://github.com/Polymer/lit-element) for webcomponents. 
+- [@solaldr/raf](https://github.com/SolalDR/raf)
 
 ## Installation
 
