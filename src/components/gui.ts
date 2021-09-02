@@ -17,6 +17,7 @@ export class GUI extends Group {
   @property() name: string
   @property({ type: String, reflect: true }) theme: string
   @property({ type: String, reflect: true }) public position?: string
+  static controllers: (typeof BaseController)[] = []
 
   constructor({
     position = 'top right',
@@ -27,13 +28,18 @@ export class GUI extends Group {
     children = [],
   }: GUIConstructor = {}) {
     super({ name, children, target })
-
     this.position = position
     this.theme = theme
     this.target = target
 
     if (parent) {
       parent.appendChild(this)
+    }
+  }
+
+  static register(controller: typeof BaseController) {
+    if (GUI.controllers.indexOf(controller) === -1) {
+      GUI.controllers.unshift(controller)
     }
   }
 

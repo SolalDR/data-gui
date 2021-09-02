@@ -1,18 +1,43 @@
 import { GUI } from '@/components/gui'
+import { Group } from '@/components/group'
 import raf from '@solaldr/raf'
+import { BooleanController } from './controllers/boolean-controller'
+import { ColorController } from './controllers/color-controller'
+import { ImageController } from './controllers/image-controller'
+import { NumberController } from './controllers/number-controller'
+import { SelectController } from './controllers/select-controller'
+import { ActionController } from './controllers/action-controller'
+import { TextController } from './controllers/text-controller'
+import { BaseGroup } from './group'
+import { BaseController, ControllerConstructor } from './controller'
+
 raf.start()
 
-export { GUI } from './components/gui'
-export { Group } from './components/group'
-export { TextController } from './controllers/text-controller'
-export { NumberController } from './controllers/number-controller'
-export { ColorController } from './controllers/color-controller'
-export { BooleanController } from './controllers/boolean-controller'
-export { SelectController } from './controllers/select-controller'
-export { ImageController } from './controllers/image-controller'
-export { ActionController } from './controllers/action-controller'
-export { BaseController } from './controller'
-export { BaseGroup } from './group'
+GUI.register(BooleanController)
+GUI.register(ActionController)
+GUI.register(TextController)
+GUI.register(ColorController)
+GUI.register(NumberController)
+GUI.register(ImageController)
+GUI.register(SelectController)
+
+/**
+ * @ignore
+ */
+export {
+  BooleanController,
+  ActionController,
+  TextController,
+  ColorController,
+  NumberController,
+  ImageController,
+  SelectController,
+  Group,
+  BaseController,
+  BaseGroup,
+  GUI,
+  ControllerConstructor
+}
 
 /**
  * @ignore
