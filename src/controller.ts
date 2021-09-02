@@ -158,20 +158,23 @@ export class BaseController extends WebComponent {
     this.parent.add(property, target, params)
   }
 
+  /**
+   * Update the target value
+   */
   protected set(value: any) {
     this.value = this.validate(value)
     this.target[this.property] = this.value
-    this.emit('update', this.value)
+    this.emit('update', this.value, this)
     this.dispatchEvent(new CustomEvent('update', { detail: this.value }))
   }
 
   protected onInput(event) {
-    this.emit('input', this.value)
+    this.emit('input', this.value, this)
     this.dispatchEvent(new CustomEvent('input', { detail: this.value }))
   }
 
   protected onChange(event) {
-    this.emit('change', this.value)
+    this.emit('change', this.value, this)
     this.dispatchEvent(new CustomEvent('change', { detail: this.value }))
   }
 
