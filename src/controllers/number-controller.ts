@@ -51,13 +51,14 @@ export class NumberController extends BaseController {
   constructor(parameters: NumberControllerConstructor) {
     super(parameters)
     const { min, max, range, step } = parameters
-    this.range = typeof range === 'boolean' ? range : !!(min && max)
-    this.min = min
+    this.range = typeof range === 'boolean' ? range : !!(!isNaN(min) && !isNaN(max))
+    this.min = !isNaN(min)
       ? min
       : this.range
       ? this.computeDefaultRange()[0]
       : -Infinity
-    this.max = max ? max : this.range ? this.computeDefaultRange()[1] : Infinity
+    
+    this.max = !isNaN(max) ? max : this.range ? this.computeDefaultRange()[1] : Infinity
     this.step = step ? step : this.computeDefaultStep()
   }
 
