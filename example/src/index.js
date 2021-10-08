@@ -1,5 +1,7 @@
-import GUI from "./../../dist/index.esm.js";
+import GUI from "./../../dist/esm/main.js";
+import { VectorController } from '../../dist/esm/vector-controller.js'
 
+// console.log(VectorController)
 /**
  * Target object 
  */
@@ -22,24 +24,24 @@ const target = {
   function: (a, b) => {
     return alert(a + b)
   },
+  testVector: 5
 }
 
 /**
  * GUI
  */
-const a = new GUI({ target, theme: "dark" });
+const a = new GUI({ target, theme: "dark" })
 a.add('width', target, { min: 10, max: 500 })
 a.add('height', target, { min: 10, max: 500 })
+a.add('testVector', target)
 a.add('count', target, { min: 10, max: 500, range: false })
-a.add('function', target, { args: [{
-  name: 'a',
-  value: 1,
-}, {
-  name: 'b',
-  value: 2,
-}] })
+a.add('function', target, { args: [{ name: 'a', value: 1 }, { name: 'b', value: 2 }] })
+a.action(target.function, { args: [{ name: 'a', value: 1 }, { name: 'b', value: 2 }] })
 a.color('color')
 a.color('backgroundTestLongText')
+a.action(() => {
+  a.theme = a.theme === 'dark' ? 'light' : 'dark'
+}, { name: 'Switch theme'})
 
 const rotate = a.group({ name: 'Rotation', target: target.rotation })
 rotate.add('factor', target.rotation, { range: true })

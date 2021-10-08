@@ -20,13 +20,15 @@ export class Group extends BaseGroup {
    */
   @query('.group-body') private groupElement: HTMLElement
 
-  constructor({ name = null, opened = true }: GroupConstructor = {}) {
+  constructor({ name = null, opened = false }: GroupConstructor = {}) {
     super({ name })
     this.opened = opened
   }
 
   private onClick() {
-    this.opened = !this.opened
+    if (this.childrenControllers.length) {
+      this.opened = !this.opened  
+    }
   }
 
   /**
@@ -54,23 +56,17 @@ export class Group extends BaseGroup {
    */
   render() {
     this.updateComputed()
+
+    const collapseIcon = this.childrenControllers.length > 0 
+      ? html`<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><path d="M18 15l-6-6-6 6" /></svg>` 
+      : ''
+
     return html`
       <div class=${this.computedClass} style=${this.computedStyle}>
         <div class="group-header" @click=${this.onClick}>
           <div class="group-label">
-            <span>${this.name}</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              strokeWidth="5"
-              strokeLinecap="square"
-              strokeLinejoin="arcs"
-            >
-              <path d="M18 15l-6-6-6 6" />
-            </svg>
+            <span class="group-name">${this.name}</span>
+            ${collapseIcon}
           </div>
           <slot></slot>
         </div>
@@ -86,10 +82,20 @@ export class Group extends BaseGroup {
    */
   public static styles = css`
     /*minify*/
-    ${BaseGroup.styles} :host {
+    :host {
       margin-top: 20px;
       --group-height: 1000px;
       --duration: 0.5s;
+    }
+    .group-name {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: var(--item-height);
+      font-size: 1em;
+      letter-spacing: 1px;
+      color: var(--color-primary);
+      padding-left: 9px;
     }
     .group-header {
       margin: auto;

@@ -14,7 +14,7 @@ interface GUIConstructor {
 
 @customElement('gui-root')
 export class GUI extends Group {
-  @property() name: string
+  @property() name: string = ''
   @property({ type: String, reflect: true }) theme: string
   @property({ type: String, reflect: true }) public position?: string
   static controllers: (typeof BaseController)[] = []
@@ -31,6 +31,7 @@ export class GUI extends Group {
     this.position = position
     this.theme = theme
     this.target = target
+    this.name = name;
 
     if (parent) {
       parent.appendChild(this)
@@ -38,6 +39,7 @@ export class GUI extends Group {
   }
 
   static register(controller: typeof BaseController) {
+    if (!controller) throw new Error('Controller cannot be registered');
     if (GUI.controllers.indexOf(controller) === -1) {
       GUI.controllers.unshift(controller)
     }
@@ -57,7 +59,7 @@ export class GUI extends Group {
       this.name === ''
         ? ''
         : html`
-            <span>${this.name}</span>
+            <span class="gui-name">${this.name}</span>
           `
     return html`
       <div class="${this.position}">
@@ -75,7 +77,7 @@ export class GUI extends Group {
    */
   public static styles = css`
     /*minify*/
-    ${BaseGroup.styles} :host {
+    :host {
       --item-height: 25px;
       --input-height: 20px;
       --color-bg-primary: #fff;
@@ -103,7 +105,16 @@ export class GUI extends Group {
       box-shadow: var(--shadow);
       border: 1px solid var(--color-bg-secondary);
     }
-
+    .gui-name {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: var(--item-height);
+      font-size: 1em;
+      letter-spacing: 1px;
+      color: var(--color-primary);
+      padding-left: 9px;
+    }
     :host([theme='dark']) {
       --color-bg-primary: #000;
       --color-bg-secondary: #222;

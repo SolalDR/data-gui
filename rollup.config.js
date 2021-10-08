@@ -24,42 +24,38 @@ var minify = function (str) {
 
 const production = !process.env.ROLLUP_WATCH;
 
-const input = 'src/main.ts';
-
 function resolveEntries() {
   return Object.entries(
     tsconfig.compilerOptions.paths
   ).map(([find, [replacement]]) => ({ find, replacement }));
 }
 
-console.log(input, pkg, tsconfig)
-
+const input = "./src/index.ts"
 
 export default [
-  {
-    input: './src/extras/vector-controller.ts',
-    output: [
-      { file: './dist/extras/vector-controller.esm.js', format: 'es' },
-    ],
-    plugins: [
-      external(),
-      ts(),
-      alias({
-        resolve: ['.ts', '.tsx'],
-        entries: resolveEntries(),
-      }),
-      commonjs({
-        include: ['node_modules/**'],
-      }),
-      minifyCssTemplate(),
-      production && filesize()
-    ],
-  },
   {
     input,
     output: [
       { file: pkg.main, format: 'cjs' },
-      { file: pkg.module, format: 'es' },
+    ],
+    plugins: [
+      external(),
+      ts(),
+      alias({
+        resolve: ['.ts', '.tsx'],
+        entries: resolveEntries(),
+      }),
+      commonjs({
+        include: ['node_modules/**'],
+      }),
+      minifyCssTemplate(),
+      production && filesize()
+    ],
+  },
+  {
+    input: ['src/index.ts', 'src/extras/vector-controller.ts'],
+    output: [
+      { dir: './dist/esm', format: 'es' },
     ],
     plugins: [
       external(),
@@ -77,7 +73,7 @@ export default [
   },
   {
     input,
-    output: { file: pkg.browser, name: 'ThreeDatGUI', format: 'umd' },
+    output: { file: pkg.browser, name: 'data-gui', format: 'umd' },
     plugins: [
       external(),
       ts(),

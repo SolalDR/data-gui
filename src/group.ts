@@ -168,21 +168,4 @@ export class BaseGroup extends WebComponent {
       </div>
     `
   }
-
-  /**
-   * @ignore
-   */
-  public static styles = css`
-    /*minify*/
-    span {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: var(--item-height);
-      font-size: 1em;
-      letter-spacing: 1px;
-      color: var(--color-primary);
-      padding-left: 9px;
-    }
-  `
 }

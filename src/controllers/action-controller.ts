@@ -1,8 +1,15 @@
-import { html, property, customElement, css } from 'lit-element'
+import { html, property, customElement, css, query } from 'lit-element'
 import { BaseController, ControllerConstructor } from '../controller'
+import { Group } from '../components/group'
 import '@/components/elements/button'
 
-interface ActionControllerConstructor extends ControllerConstructor {}
+export interface ActionArgument {
+  name: string
+  value: unknown
+}
+export interface ActionControllerConstructor extends ControllerConstructor {
+  args?: ActionArgument[]
+}
 
 /**
  * ActionController is a controller used to trigger JS functions
@@ -14,10 +21,10 @@ interface ActionControllerConstructor extends ControllerConstructor {}
  * const target = { action: callback }
  *
  * // Method 1
- * const action = group.action(callback, { args: [1, 2] })
+ * const action = group.action(callback, { args: [{ value: 1, name: 'a'}, { value: 1, name: 'b'}] })
  *
  * // Method 2
- * action = group.add('action', target, { args: [1, 2] })
+ * action = group.add('action', target, { args: [{ value: 1, name: 'a'}, { value: 1, name: 'b'}] })
  *
  * // Manually trigger action
  * action.run()
@@ -27,13 +34,21 @@ interface ActionControllerConstructor extends ControllerConstructor {}
  */
 @customElement('gui-action-controller')
 export class ActionController extends BaseController {
-  args: Array<ControllerConstructor> = []
+  private arguments: ActionArgument[]
+  private argumentsTarget: object = {}
 
   /**
    * @ignore
    */
+  @query('gui-group') private argumentGroup: Group
+
+  /**
+   * @ignore
+   * @todo Check args validity
+   */
   constructor(parameters: ActionControllerConstructor) {
     super(parameters)
+    this.arguments = parameters.args || [];
   }
 
   /**
@@ -43,20 +58,25 @@ export class ActionController extends BaseController {
     return typeof value === 'function'
   }
 
-  protected onInput(event) {
-    this.set(event.target.value)
-    super.onInput(event)
-  }
-
-  protected onChange(event) {
-    this.set(event.target.value)
+  /**
+   * @ignore
+   */
+  firstUpdated() {
+    this.arguments.forEach(arg => {
+      this.argumentsTarget[arg.name] = arg.value;
+      const params = {...arg}
+      delete params.name
+      delete params.value
+      this.argumentGroup.add(arg.name, this.argumentsTarget, params)
+    })
   }
 
   /**
    * Execute the action
    */
-  run() {
-    this.value(...this.args)
+  run(event) {
+    event.stopPropagation()
+    this.value(...(this.arguments.map(arg => this.argumentsTarget[arg.name])))
   }
 
   /**
@@ -64,12 +84,11 @@ export class ActionController extends BaseController {
    */
   render() {
     return html`
-      <div>
-        <label>${this.name}</label>
-        <div class="right">
-          <gui-button @click=${() => this.run()}>Execute</gui-button>
-        </div>
-      </div>
+      <gui-group .name=${this.name}>
+        <gui-button class="play-button" @click=${(event) => this.run(event)}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        </gui-button>
+      </gui-group>
     `
   }
 
@@ -79,9 +98,17 @@ export class ActionController extends BaseController {
   public static styles = css`
     /*minify*/
     ${BaseController.styles}
-    .right > gui-button {
-      flex: none;
-      display: inline-block;
+    :host {
+      height: auto;
+    }
+    svg {
+      height: 1em;
+    }
+    .play-button {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: var(--padding-s);
     }
   `
 }
