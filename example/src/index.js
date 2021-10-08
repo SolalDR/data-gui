@@ -18,7 +18,10 @@ const target = {
     factorY: 0.35
   },
   color: "rgba(20, 169, 159, 0.1)",
-  background: "#000",
+  backgroundTestLongText: "#000",
+  function: (a, b) => {
+    return alert(a + b)
+  },
 }
 
 /**
@@ -28,8 +31,15 @@ const a = new GUI({ target, theme: "dark" });
 a.add('width', target, { min: 10, max: 500 })
 a.add('height', target, { min: 10, max: 500 })
 a.add('count', target, { min: 10, max: 500, range: false })
+a.add('function', target, { args: [{
+  name: 'a',
+  value: 1,
+}, {
+  name: 'b',
+  value: 2,
+}] })
 a.color('color')
-a.color('background')
+a.color('backgroundTestLongText')
 
 const rotate = a.group({ name: 'Rotation', target: target.rotation })
 rotate.add('factor', target.rotation, { range: true })

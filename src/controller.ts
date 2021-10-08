@@ -217,12 +217,15 @@ export class BaseController extends WebComponent {
     }
 
     :host > div > *:first-child {
-      max-width: 30%;
+      max-width: 50%;
       line-height: var(--item-height);
       text-align: left;
       flex: 1;
       padding-right: 15px;
       font-size: 1em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .right {

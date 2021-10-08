@@ -20,7 +20,7 @@ export class Input extends LitElement {
       box-sizing: border-box;
     }
     label {
-      font-size: 0.9em;
+      font-size: 0.85em;
       color: var(--color-text-primary);
       text-align: center;
       display: flex;
@@ -36,8 +36,8 @@ export class Input extends LitElement {
       flex: 1;
       width: 100%;
       background-color: transparent;
-      font-size: 0.9em;
-      text-align: left;
+      font-size: 0.85em;
+      text-align: right;
       box-shadow: 0;
       outline: 0;
       color: var(--input-text, #000);

@@ -56,22 +56,24 @@ export class Group extends BaseGroup {
     this.updateComputed()
     return html`
       <div class=${this.computedClass} style=${this.computedStyle}>
-        <p class="group-header" @click=${this.onClick}>
-          <span>${this.name}</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#000000"
-            strokeWidth="5"
-            strokeLinecap="square"
-            strokeLinejoin="arcs"
-          >
-            <path d="M18 15l-6-6-6 6" />
-          </svg>
-        </p>
+        <div class="group-header" @click=${this.onClick}>
+          <div class="group-label">
+            <span>${this.name}</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              strokeWidth="5"
+              strokeLinecap="square"
+              strokeLinejoin="arcs"
+            >
+              <path d="M18 15l-6-6-6 6" />
+            </svg>
+          </div>
+          <slot></slot>
+        </div>
         <div class="group-body">
           ${this.childrenControllers}
         </div>
@@ -90,16 +92,26 @@ export class Group extends BaseGroup {
       --duration: 0.5s;
     }
     .group-header {
-      position: relative;
       margin: auto;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-bg-secondary);
+    }
+    .group-label {
+      position: relative;
+      display: flex;
     }
     .group-header svg {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%) rotate(180deg);
-      width: 20px;
+      /* position: absolute; */
+      /* right: 10px; */
+      /* top: 50%; */
+      transform: scaleY(-1);
+      height: var(--item-height);
+      width: 15px;
       transition: transform 0.4s ease;
+      stroke: var(--color-primary);
+      left: 5px;
+      position: relative;
     }
 
     .group {
@@ -124,11 +136,11 @@ export class Group extends BaseGroup {
 
     .group--open .group-body {
       opacity: 1;
-      transform: translateX(0px);
+      transform: scaleY(1);
       transition-delay: 100ms;
     }
     .group--open svg {
-      transform: translateY(-50%) rotate(0deg);
+      transform: rotate(0deg);
     }
   `
 }

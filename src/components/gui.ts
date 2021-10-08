@@ -76,7 +76,7 @@ export class GUI extends Group {
   public static styles = css`
     /*minify*/
     ${BaseGroup.styles} :host {
-      --item-height: 30px;
+      --item-height: 25px;
       --input-height: 20px;
       --color-bg-primary: #fff;
       --color-bg-secondary: #efefef;
@@ -88,13 +88,14 @@ export class GUI extends Group {
       --padding-xs: 5px;
       --padding-s: 10px;
       --padding-m: 20px;
-      --offset: var(--padding-s);
+      --controller-max-width: 170px;
+      --offset: var(--padding-xs);
       --input-text: var(--color-text-secondary);
       --input-bg: var(--color-bg-primary);
 
       font-size: 64%;
       font-family: sans-serif;
-      width: var(--width, 300px);
+      width: var(--width, 250px);
       position: absolute;
       display: block;
       background-color: var(--color-bg-primary, #ffffff);

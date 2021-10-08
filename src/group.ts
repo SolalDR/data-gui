@@ -178,13 +178,11 @@ export class BaseGroup extends WebComponent {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-left: 20px;
-      height: 30px;
-      color: var(--color-text-primary);
-      background-color: var(--color-bg-secondary);
+      height: var(--item-height);
       font-size: 1em;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
+      color: var(--color-primary);
+      padding-left: 9px;
     }
   `
 }

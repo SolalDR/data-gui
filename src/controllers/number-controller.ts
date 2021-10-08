@@ -142,10 +142,11 @@ export class NumberController extends BaseController {
         `
       : ''
 
+    const containerClass = 'input-container right ' + (this.range ? 'input-container--withRange' : '')
     return html`
       <div>
         <label>${this.name}</label>
-        <div class="right">
+        <div class=${containerClass}>
           <input
             .type=${this.range ? 'range' : 'number'}
             .value=${String(this.value)}
@@ -173,13 +174,19 @@ export class NumberController extends BaseController {
     /*minify*/
     ${BaseController.styles}
 
-    .right {
+    .input-container {
       flex-direction: row;
       justify-content: space-between;
+      padding-left: var(--padding-s);
+    }
+    .input-container--withRange {
+      max-width: 120px;
+      min-width: 120px;
     }
     input {
       height: var(--item-height);
       max-height: none;
+      text-align: right;
     }
 
     input[type='range'] ~ input[type='number'] {
@@ -209,9 +216,9 @@ export class NumberController extends BaseController {
       -webkit-appearance: none;
       appearance: none;
       background-color: var(--color-text-primary);
-      width: 10px;
-      height: 10px;
-      border-radius: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 6px;
       transition: 0.15s;
       transform: translateY(calc(1px - 50%));
     }
@@ -223,9 +230,9 @@ export class NumberController extends BaseController {
       appearance: none;
       appearance: none;
       background-color: var(--color-text-primary);
-      width: 10px;
-      height: 10px;
-      border-radius: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 6px;
       transition: 0.15s;
       transform: translateY(calc(1px - 50%));
     }
@@ -237,9 +244,9 @@ export class NumberController extends BaseController {
       appearance: none;
       appearance: none;
       background-color: var(--color-text-primary);
-      width: 10px;
-      height: 10px;
-      border-radius: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 6px;
       transition: 0.15s;
       transform: translateY(calc(1px - 50%));
     }

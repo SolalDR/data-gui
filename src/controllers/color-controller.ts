@@ -129,7 +129,7 @@ export class ColorController extends BaseController {
       ? html`
           <gui-input
             step="0.01"
-            class="input-channel"
+            class="input-channel input-channel--alpha"
             .value=${String(this.color.a)}
             label="A"
             type="number"
@@ -142,7 +142,7 @@ export class ColorController extends BaseController {
     return html`
       <div>
         <label>${this.name}</label>
-        <div class="right" .style=${`--value: ${this.labelValue}`}>
+        <div class="input-container right" .style=${`--value: ${this.labelValue}`}>
           <div class="input-color">
             <span></span>
             <input
@@ -204,7 +204,8 @@ export class ColorController extends BaseController {
     /*minify*/
     ${BaseController.styles}
     .input-color {
-      max-width: 20px;
+      max-width: 15px;
+      width: 15px;
       height: 100%;
     }
 
@@ -212,8 +213,8 @@ export class ColorController extends BaseController {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       border: 1px solid var(--color-bg-secondary);
       box-sizing: border-box;
       background-color: var(--value);
@@ -238,12 +239,12 @@ export class ColorController extends BaseController {
     }
 
     .input-channel[label='A'] {
-      min-width: 40px;
-      max-width: 40px;
+      min-width: 30px;
+      max-width: 30px;
     }
 
-    .right {
-      justify-content: flex-start;
+    .input-container {
+      justify-content: flex-end;
       flex-direction: row;
     }
 

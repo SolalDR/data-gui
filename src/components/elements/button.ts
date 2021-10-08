@@ -7,13 +7,11 @@ export class Button extends LitElement {
     button {
       color: var(--color-bg-primary);
       font-family: sans-serif;
-      font-size: 0.9em;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-size: 0.85em;
+      letter-spacing: 0.5px;
       background: white;
       display: inline-block;
       padding: var(--padding-xs) var(--padding-s);
-      font-weight: bold;
       background-color: var(--color-primary);
       border: 0;
       border-radius: 3px;
@@ -21,7 +19,7 @@ export class Button extends LitElement {
       box-shadow: none;
     }
     button:hover {
-      color: var(--color-text-primary);
+      background-color: #16e0b0;
       cursor: pointer;
     }
   `

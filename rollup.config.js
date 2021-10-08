@@ -34,7 +34,27 @@ function resolveEntries() {
 
 console.log(input, pkg, tsconfig)
 
+
 export default [
+  {
+    input: './src/extras/vector-controller.ts',
+    output: [
+      { file: './dist/extras/vector-controller.esm.js', format: 'es' },
+    ],
+    plugins: [
+      external(),
+      ts(),
+      alias({
+        resolve: ['.ts', '.tsx'],
+        entries: resolveEntries(),
+      }),
+      commonjs({
+        include: ['node_modules/**'],
+      }),
+      minifyCssTemplate(),
+      production && filesize()
+    ],
+  },
   {
     input,
     output: [
