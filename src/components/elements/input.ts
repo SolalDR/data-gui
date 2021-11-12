@@ -5,7 +5,7 @@ export class Input extends LitElement {
   @property() label = null
   @property({ reflect: true }) type = 'text'
   @property({ reflect: true, type: Number }) step = 1
-  @property() value = ''
+  @property() value: string = ''
 
   static styles = css`
     /*minify*/
@@ -14,7 +14,6 @@ export class Input extends LitElement {
       display: inline-block;
       overflow: hidden;
       margin: 0;
-      border-radius: 5px;
       background-color: var(--input-bg);
       display: flex;
       box-sizing: border-box;
@@ -35,12 +34,15 @@ export class Input extends LitElement {
       border: 0;
       flex: 1;
       width: 100%;
-      background-color: transparent;
       font-size: 0.85em;
-      text-align: right;
+      text-align: left;
       box-shadow: 0;
       outline: 0;
       color: var(--input-text, #000);
+      background: rgba(255, 255, 255, 0.1);
+      height: 15px;
+      margin-top: 3px;
+      user-select: none;
     }
 
     input::-webkit-outer-spin-button,
@@ -51,6 +53,8 @@ export class Input extends LitElement {
   `
 
   onInput(event) {
+    event.preventDefault()
+    event.stopPropagation()
     this.dispatchEvent(
       new CustomEvent('input', {
         detail: event.target.value,
@@ -58,7 +62,31 @@ export class Input extends LitElement {
     )
   }
 
+  onMouseDown(event) {
+    const from = event.clientY
+    const value = event.target.value
+
+    const onMouseMove = (event) => {
+      const current = event.clientY
+      this.dispatchEvent(new CustomEvent('slide', {
+        detail: {
+          startValue: value,
+          distance: current - from
+        }
+      }))
+    }
+
+    const onMouseUp = () => {
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('mouseup', onMouseUp)
+    }
+    window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('mouseup', onMouseUp)
+  }
+
   onChange(event) {
+    event.preventDefault()
+    event.stopPropagation()
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: event.target.value,
@@ -84,6 +112,9 @@ export class Input extends LitElement {
           }}
           @change=${event => {
             this.onChange(event)
+          }}
+          @mousedown=${event => {
+            this.onMouseDown(event)
           }}
         />
       </p>

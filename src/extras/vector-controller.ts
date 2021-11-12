@@ -1,64 +1,130 @@
-import { html, customElement, css, query } from 'lit-element'
-import { BaseController } from '../controller'
+import { html, customElement, css, property } from 'lit-element'
+import { BaseController, ControllerConstructor } from '../controller'
 import { GUI } from '../components/gui';
-import { Group } from '../components/group'
-import '@/components/elements/button'
+import { computeStep } from '@/helpers/compute-step'
+
+// import { Group } from '../components/group'
+// import '@/components/elements/button'
+
+interface VectorControllerConstructor extends ControllerConstructor{
+  step?: number
+}
+
+interface Vector {
+  x: number
+  y: number
+  z?: number
+  w?: number
+}
 
 /**
- * ActionController is a controller used to trigger JS functions
+ * VectorController is a controller used in 3D
  * ## How to use
  * ``` javascript
- * const callback = (a, b) => {
- *   return a + b
- * }
- * const target = { action: callback }
- *
- * // Method 1
- * const action = group.action(callback, { args: [{ value: 1, name: 'a'}, { value: 1, name: 'b'}] })
- *
- * // Method 2
- * action = group.add('action', target, { args: [{ value: 1, name: 'a'}, { value: 1, name: 'b'}] })
- *
- * // Manually trigger action
- * action.run()
+
  * ```
- *
  * For more information about basic use see {@link BaseController}
  */
 @customElement('gui-vector-controller')
 export class VectorController extends BaseController {
+  declare value: Vector
+  keys: string[]
 
   /**
    * @ignore
    */
-  @query('gui-group') private argumentGroup: Group
+  @property({ type: Object }) _value: Vector
 
   /**
-   * @ignore
+   * If not defined `step` will be calculated automatically based on initial value
    */
-  static isCompatible(value: unknown, _: string, __: any): boolean {
-    return value === 5
+  @property({ type: Number }) step: number
+
+  constructor(parameters: VectorControllerConstructor) {
+    super(parameters)
+    this.step = parameters.step ? parameters.step : computeStep(this.value.x)
   }
 
   /**
    * @ignore
    */
-  firstUpdated() {
-    // this.arguments.forEach(arg => {
-    //   this.argumentsTarget[arg.name] = arg.value;
-    //   const params = {...arg}
-    //   delete params.name
-    //   delete params.value
-    //   this.argumentGroup.add(arg.name, this.argumentsTarget, params)
-    // })
+  static isCompatible(value: Vector, _: string, __: any): boolean {
+    return !!(value.x !== undefined && value.y !== undefined && !isNaN(value.x) && !isNaN(value.y))
   }
 
+  /**
+   * @ignore
+   */
+  protected onInputChannel(channel: string, value) {
+    this.value[channel] = value;
+    this.renderValue();
+  }
+
+  /**
+   * @ignore
+   */
+  protected onChangeChannel(channel: string, value) {
+    this.value[channel] = value;
+    this.renderValue();
+  }
+
+  /**
+   * @ignore
+   */
+  protected onSlideChannel(channel: string, event) {
+    const delta = ~~(event.distance * 0.1) * this.step
+    const newValue = Number(event.startValue) - delta
+    this.onChangeChannel(channel, newValue)
+  }
+
+  /**
+   * @ignore
+   * Recreate _value to force rendering
+   */
+  renderValue() {
+    this._value = this.keys.reduce((acc, key) => {
+      acc[key] = this.value[key]
+      return acc;
+    }, {}) as Vector
+  }
+
+  /**
+   * @ignore
+   * Initialize value and define allowed keys
+   */
+  connectedCallback() {
+    this.keys = Object.keys(this.value).filter(k => {
+      return ['x', 'y', 'z', 'w'].includes(k)
+    })
+
+    this.renderValue()
+    super.connectedCallback()
+  }
+    
   /**
    * @ignore
    */
   render() {
+    const inputs = this.keys.map(k => {
+      return html`<gui-input
+        class="input-channel"
+        type="number"
+        .value=${String(this._value[k])}
+        .step=${this.step}
+        label=${k.toUpperCase()}
+        @change=${event => this.onChangeChannel(k, event.detail)}
+        @input=${event => this.onInputChannel(k, event.detail)}
+        @slide=${event => this.onSlideChannel(k, event.detail)}
+      ></gui-input>`
+    })
+
     return html`
-      <p>Salut</p>
+      <div>
+        <label>${this.name}</label>
+        <div class="input-container right">
+          ${inputs}
+        </div>
+      </div>
     `
   }
 
@@ -67,17 +133,23 @@ export class VectorController extends BaseController {
    */
   public static styles = css`
     /*minify*/
+    ${BaseController.styles}
     :host {
       height: auto;
     }
     svg {
       height: 1em;
     }
-    .play-button {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-right: var(--padding-s);
+
+    .input-channel {
+      margin-left: 5px;
+      min-width: 37px;
+      max-width: 37px;
+    }
+
+    .input-container {
+      justify-content: flex-end;
+      flex-direction: row;
     }
   `
 }

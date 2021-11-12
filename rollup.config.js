@@ -11,16 +11,6 @@ import minifyCssTemplate from './minify-css-template'
 
 import pkg from './package.json';
 import tsconfig from './tsconfig.json';
-  
-var minify = function (str) {
-  str = str.replace(/\/\*(.|\n)*?\*\//g, ""); // multiline comments
-  str = str.replace(/\s*(\{|\}|\[|\]|\(|\)|\:|\;|\,)\s*/g, "$1"); // space before chars (){}[]:;,
-  str = str.replace(/#([\da-fA-F])\1([\da-fA-F])\2([\da-fA-F])\3/g, "#$1$2$3"); // condense hex code #FFFFFF => #FFF
-  str = str.replace(/\n/g, "");
-  str = str.replace(/;\}/g, "}");
-  str = str.replace(/^\s+|\s+$/g, "");
-  return str;
-};
 
 const production = !process.env.ROLLUP_WATCH;
 

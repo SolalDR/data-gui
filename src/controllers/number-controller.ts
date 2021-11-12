@@ -1,5 +1,6 @@
 import { html, property, customElement, css, query } from 'lit-element'
 import { BaseController, ControllerConstructor } from '../controller'
+import { computeStep } from '@/helpers/compute-step'
 
 interface NumberControllerConstructor extends ControllerConstructor {
   min?: number
@@ -59,7 +60,7 @@ export class NumberController extends BaseController {
       : -Infinity
     
     this.max = !isNaN(max) ? max : this.range ? this.computeDefaultRange()[1] : Infinity
-    this.step = step ? step : this.computeDefaultStep()
+    this.step = step ? step : computeStep(this.value, this.max)
   }
 
   protected computeDefaultRange(value = this.value) {
@@ -68,13 +69,6 @@ export class NumberController extends BaseController {
       pow = 0
     while (vAbs > (r = 10 ** pow || r)) pow++
     return [value < 0 ? -r : 0, r]
-  }
-
-  protected computeDefaultStep(value: number = this.value): number {
-    if (this.max) return this.max / 100
-    if (Math.abs(value) < 1 && value !== 0) return 0.001
-    if (Math.abs(value) < 10 || value === 0) return 0.1
-    return 1
   }
 
   /**
@@ -98,17 +92,26 @@ export class NumberController extends BaseController {
   /**
    * @override
    */
-  protected onInput(event) {
-    this.set(Number(event.target.value))
-    super.onInput(event)
+  protected onInput(value) {
+    this.set(Number(value))
+    super.onInput(value)
   }
 
   /**
    * @override
    */
-  protected onChange(event) {
-    this.set(Number(event.target.value))
-    super.onChange(event)
+  protected onChange(value) {
+    this.set(Number(value))
+    super.onChange(value)
+  }
+
+  /**
+   * @ignore
+   */
+  protected onSlide(event) {
+    const delta = ~~(event.distance * 0.1) * this.step
+    const newValue = Number(event.startValue) - delta
+    this.set(newValue)
   }
 
   /**
@@ -124,44 +127,40 @@ export class NumberController extends BaseController {
    * @ignore
    */
   render() {
-    const rangeInputNumber = this.range
-      ? html`
-          <input
-            type="number"
-            .value=${this.value}
-            .min=${String(this.min)}
-            .max=${String(this.max)}
-            .step=${String(this.step)}
-            @input=${event => {
-              this.onInput(event)
-            }}
-            @change=${event => {
-              this.onChange(event)
-            }}
-          />
-        `
-      : ''
+    const inputNumber = html`
+      <gui-input
+        class="input-channel"
+        type="number"
+        .value=${String(this.value)}
+        .step=${this.step}
+        @input=${event => this.onInput(event.detail)}
+        @slide=${event => this.onSlide(event.detail)}
+      ></gui-input>`
+
+    const inputRange = this.range ? html`
+      <input
+        type='range'
+        .value=${String(this.value)}
+        .min=${String(this.min)}
+        .max=${String(this.max)}
+        .step=${String(this.step)}
+        .disabled=${this.disabled}
+        @input=${event => {
+          this.onInput(event.target.value)
+        }}
+        @change=${event => {
+          this.onChange(event.target.value)
+        }}
+      />
+    ` : ''
 
     const containerClass = 'input-container right ' + (this.range ? 'input-container--withRange' : '')
     return html`
       <div>
         <label>${this.name}</label>
         <div class=${containerClass}>
-          <input
-            .type=${this.range ? 'range' : 'number'}
-            .value=${String(this.value)}
-            .min=${String(this.min)}
-            .max=${String(this.max)}
-            .step=${String(this.step)}
-            .disabled=${this.disabled}
-            @input=${event => {
-              this.onInput(event)
-            }}
-            @change=${event => {
-              this.onChange(event)
-            }}
-          />
-          ${rangeInputNumber}
+          ${inputRange}
+          ${inputNumber}
         </div>
       </div>
     `
@@ -174,15 +173,23 @@ export class NumberController extends BaseController {
     /*minify*/
     ${BaseController.styles}
 
+    gui-input {
+      max-width: 30px;
+      margin-left: 5px;
+    }
+
     .input-container {
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-end;
       padding-left: var(--padding-s);
     }
+
     .input-container--withRange {
+      justify-content: space-between;
       max-width: 120px;
       min-width: 120px;
     }
+    
     input {
       height: var(--item-height);
       max-height: none;

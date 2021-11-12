@@ -1,4 +1,4 @@
-import GUI from "./../../dist/esm/main.js";
+import GUI from "./../../dist/esm/index.js";
 import { VectorController } from '../../dist/esm/vector-controller.js'
 
 // console.log(VectorController)
@@ -24,7 +24,7 @@ const target = {
   function: (a, b) => {
     return alert(a + b)
   },
-  testVector: 5
+  testVector: { x: 0, y: 1 , z: 10}
 }
 
 /**
@@ -33,7 +33,7 @@ const target = {
 const a = new GUI({ target, theme: "dark" })
 a.add('width', target, { min: 10, max: 500 })
 a.add('height', target, { min: 10, max: 500 })
-a.add('testVector', target)
+a.add('testVector', target, { step: 0.1 })
 a.add('count', target, { min: 10, max: 500, range: false })
 a.add('function', target, { args: [{ name: 'a', value: 1 }, { name: 'b', value: 2 }] })
 a.action(target.function, { args: [{ name: 'a', value: 1 }, { name: 'b', value: 2 }] })
