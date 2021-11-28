@@ -10,6 +10,8 @@ export interface GroupConstructor {
   target?: Object
 }
 
+type Child = BaseGroup|BaseController
+
 /**
  * `BaseGroup` is the mother class of {@link Group} and {@link GUI}.
  */
@@ -18,16 +20,36 @@ export class BaseGroup extends WebComponent {
    * Display name of the group
    */
   @property() name: string
+
+  /**
+   * Array containing controllers and groups
+   */
+  @property({
+    type: Array, 
+    hasChanged: (newer: Array<Child>, older: Array<Child>) => {
+      return newer !== older || newer.length !== older.length
+    } 
+  }) protected childrenControllers: Array<Child> = []
+  
+  /**
+   * Does group is open
+   */
+  @property({
+    reflect: true,
+    type: Boolean,
+    attribute: 'opened' 
+  })
+  private _opened: boolean = false
+
   /**
    * The default target object of the group (used when `target` parameter is not defined in `group.add` method)
    */
   target: Object = {}
-  @property({ type: Array }) protected childrenControllers: Array<
-    BaseGroup | BaseController
-  > = []
+
+  /**
+   * Parent group
+   */
   private parent?: BaseGroup = null
-  @property({ reflect: true, type: Boolean, attribute: 'opened' })
-  private _opened: boolean = false
 
   constructor({
     name = '',

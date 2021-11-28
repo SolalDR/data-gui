@@ -50,7 +50,12 @@ rotate.add('speedFactor', target.rotation, { range: true, min: 0, max: 0.01 })
 
 const scale = a.group({ name: 'Scale' })
 scale.add('factorX', target.scale, { range: true })
-scale.add('factorY', target.scale, { range: true })
+// scale.add('factorY', target.scale, { range: true })
+
+setTimeout(() => {
+  console.log('hello')
+  scale.add('factorY', target.scale, { range: true })
+}, 1000)
 
 /**
  * Initialize canvas
