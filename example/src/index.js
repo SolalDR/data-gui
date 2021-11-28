@@ -54,7 +54,7 @@ scale.add('factorX', target.scale, { range: true })
 
 setTimeout(() => {
   console.log('hello')
-  scale.add('factorY', target.scale, { range: true })
+  a.add('factorY', target.scale, { range: true })
 }, 1000)
 
 /**

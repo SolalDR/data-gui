@@ -27,6 +27,7 @@ export class BaseGroup extends WebComponent {
   @property({
     type: Array, 
     hasChanged: (newer: Array<Child>, older: Array<Child>) => {
+      console.log(newer, older)
       return newer !== older || newer.length !== older.length
     } 
   }) protected childrenControllers: Array<Child> = []
@@ -127,6 +128,7 @@ export class BaseGroup extends WebComponent {
       parent: this,
     })
     this.childrenControllers.push(controller)
+    this.requestUpdateInternal()
     return controller
   }
 
@@ -166,7 +168,7 @@ export class BaseGroup extends WebComponent {
       return child === controller
     })
     this.childrenControllers.splice(i, 1)
-    this.forceRender()
+    this.requestUpdateInternal()
   }
 
   private validateName(name: string): string {
