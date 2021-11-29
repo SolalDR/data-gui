@@ -48,6 +48,7 @@ export class GUI extends Group {
   group(descriptor: GroupConstructor) {
     const group = new Group(descriptor)
     this.childrenControllers.push(group)
+    this.requestUpdateInternal()
     return group
   }
 

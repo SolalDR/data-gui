@@ -40,6 +40,7 @@ export class Group extends BaseGroup {
       this.updateComputed()
     })
     this.childrenControllers.push(group)
+    this.requestUpdateInternal()
     return group
   }
 
