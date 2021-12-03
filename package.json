@@ -1,6 +1,6 @@
 {
   "name": "data-gui",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
   "browser": "dist/index.umd.js",
@@ -43,7 +43,7 @@
     "pretest": "npm run build",
     "commit": "npm run format && npm run doc && cz",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "deploy": "npm run doc && npm run build && npm publish",
+    "deploy": "rm -rf ./dist && npm run doc && npm run build && npm publish",
     "doc": "typedoc"
   },
   "files": [
