@@ -181,13 +181,10 @@ export class NumberController extends BaseController {
     .input-container {
       flex-direction: row;
       justify-content: flex-end;
-      padding-left: var(--padding-s);
     }
 
     .input-container--withRange {
       justify-content: space-between;
-      max-width: 120px;
-      min-width: 120px;
     }
     
     input {

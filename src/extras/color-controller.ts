@@ -1,5 +1,8 @@
-import { html, property, customElement, css, query } from 'lit-element'
+
+import { GUI } from '../components/gui';
+import { html, customElement, css, query } from 'lit-element'
 import { BaseController, ControllerConstructor } from '../controller'
+import { NumberController } from '@/controllers/number-controller';
 import { Color, isColor } from '@/helpers/color-helper'
 import '@/components/elements/input'
 
@@ -82,7 +85,8 @@ export class ColorController extends BaseController {
   protected updateInputValue() {
     const hexValue = this.color.getHexString()
     this.labelValue = this.color.getRgbString()
-    if (hexValue.length === 9) {
+    // console.log(hexValue)
+    if (hexValue.length > 6) {
       this.inputValue = hexValue.substring(0, 7)
     } else {
       this.inputValue = hexValue
@@ -90,17 +94,14 @@ export class ColorController extends BaseController {
   }
 
   protected onInput(event) {
+    console.log('Before', this.color.getHexString())
     this.color.setStyle(event.target.value)
+    console.log('After', this.color.getHexString())
+    console.log('Format', this.color.format())
     this.set(this.color.format())
     this.updateInputValue()
     super.onInput(event)
-  }
-
-  protected onChange(event) {
-    this.color.setStyle(event.target.value)
-    this.set(this.color.format())
-    this.updateInputValue()
-    super.onChange(event)
+    console.log(event.target.value)
   }
 
   protected onInputChannel(channel, value) {
@@ -143,20 +144,6 @@ export class ColorController extends BaseController {
       <div>
         <label>${this.name}</label>
         <div class="input-container right" .style=${`--value: ${this.labelValue}`}>
-          <div class="input-color">
-            <span></span>
-            <input
-              type="color"
-              .value=${this.inputValue}
-              @input=${event => {
-                this.onInput(event)
-              }}
-              @change=${event => {
-                this.onChange(event)
-              }}
-            />
-          </div>
-
           <gui-input
             class="input-channel"
             type="number"
@@ -182,16 +169,20 @@ export class ColorController extends BaseController {
             @input=${event => this.onInputChannel('b', event.detail)}
           ></gui-input>
           ${alpha}
-          <!-- <input
-            type="text"
-            .value=${this.value}
-            @input=${event => {
-            this.onInput(event)
-          }}
-            @change=${event => {
-            this.onChange(event)
-          }}
-          /> -->
+
+          <div class="input-color">
+            <span></span>
+            <input
+              type="color"
+              .value=${this.inputValue}
+              @input=${event => {
+                this.onInput(event)
+              }}
+              @change=${event => {
+                this.onChange(event)
+              }}
+            />
+          </div>
         </div>
       </div>
     `
@@ -203,23 +194,25 @@ export class ColorController extends BaseController {
   public static styles = css`
     /*minify*/
     ${BaseController.styles}
+
+    :host {
+      min-height: 45px;
+    }
+
     .input-color {
-      max-width: 15px;
-      width: 15px;
-      height: 100%;
+      min-width: 100%;
+      margin-top: 2px;
     }
 
     .input-color span {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 15px;
-      height: 15px;
+      width: 100%;
+      height: 20px;
       border: 1px solid var(--color-bg-secondary);
       box-sizing: border-box;
       background-color: var(--value);
       display: block;
-      border-radius: 10px;
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
 
@@ -228,29 +221,25 @@ export class ColorController extends BaseController {
       width: 100%;
       /* width: 20px; */
       border: 0;
-      border-radius: 10px;
+      border-radius: var(--radius);
       padding: 0;
       opacity: 0;
-    }
-
-    .input-channel {
-      min-width: 32px;
-      max-width: 32px;
-    }
-
-    .input-channel[label='A'] {
-      min-width: 30px;
-      max-width: 30px;
+      height: 20px;
     }
 
     .input-container {
       justify-content: flex-end;
       flex-direction: row;
+      flex-wrap: wrap;
     }
 
-    gui-input {
-      max-width: 50px;
+    .input-channel:not(:first-child) {
       margin-left: 5px;
     }
   `
 }
+
+
+GUI.controllers.splice(
+  GUI.controllers.indexOf(NumberController) + 1, 0, ColorController
+)

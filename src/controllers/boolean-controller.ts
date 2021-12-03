@@ -81,7 +81,7 @@ export class BooleanController extends BaseController {
   public static styles = css`
     /*minify*/
     ${BaseController.styles}
-    .right input[type="checkbox"] {
+    input[type="checkbox"] {
       width: 15px !important;
       height: 15px !important;
       opacity: 0;

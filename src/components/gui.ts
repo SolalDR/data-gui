@@ -38,7 +38,7 @@ export class GUI extends Group {
     }
   }
 
-  static register(controller: typeof BaseController) {
+  static register(controller: typeof BaseController, push = false) {
     if (!controller) throw new Error('Controller cannot be registered');
     if (GUI.controllers.indexOf(controller) === -1) {
       GUI.controllers.unshift(controller)

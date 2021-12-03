@@ -2,6 +2,8 @@ import { html, property, css, LitElement } from 'lit-element'
 import { WebComponent } from '@/component'
 import getControllerConstructor from '@/helpers/get-controller-constructor'
 import { BaseController } from './controller'
+import { ActionController } from './controllers/action-controller'
+import { ColorController } from './extras/color-controller'
 
 export interface GroupConstructor {
   name?: string
@@ -114,12 +116,13 @@ export class BaseGroup extends WebComponent {
    * group.add('property', target)
    * ```
    */
-  add(property: string, target: Object = this.target, params: any = {}): any {
+  add<Base extends BaseController>(property: string, target: Object = this.target, params: any = {}): Base {
     const constructor = getControllerConstructor(
       target[property],
       property,
       params,
     )
+    if (!constructor) return
     const controller = new constructor({
       ...params,
       name: this.validateName(params.name || property),
@@ -129,17 +132,17 @@ export class BaseGroup extends WebComponent {
     })
     this.childrenControllers.push(controller)
     this.requestUpdateInternal()
-    return controller
+    return controller as unknown as Base
   }
 
   /**
    * Create a new {@link ActionController}
    */
-  action(callback: Function, parameters: Object) {
+  action(callback: Function, parameters: Object): ActionController {
     if (typeof callback !== 'function')
       throw new Error('Argument "callback" is not a function')
     const target = { action: callback }
-    this.add('action', target, {
+    return this.add<ActionController>('action', target, {
       ...parameters,
     })
   }
@@ -147,8 +150,8 @@ export class BaseGroup extends WebComponent {
   /**
    * Create a new {@link ColorController}
    */
-  color(property: string, target = this.target, parameters: Object = {}) {
-    this.add(property, target, {
+  color(property: string, target = this.target, parameters: Object = {}): ColorController {
+    return this.add<ColorController>(property, target, {
       type: 'color',
       ...parameters,
     })

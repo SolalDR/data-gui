@@ -1,6 +1,7 @@
 import GUI from "./../../dist/esm/index.js";
 import { VectorController } from '../../dist/esm/vector-controller.js'
 import { CanvasController } from '../../dist/esm/canvas-controller.js'
+import { ColorController } from '../../dist/esm/color-controller.js'
 
 // console.log(VectorController)
 /**
@@ -26,8 +27,56 @@ const target = {
   function: (a, b) => {
     return alert(a + b)
   },
-  testVector: { x: 0, y: 1 , z: 10}
+  testVector: { x: 0, y: 1 , z: 10},
+  testArray: 'Test'
 }
+
+const blendOptions = {
+  tool: 'brush',
+  size: 10,
+  color: "#FF0000",
+  enabled: true,
+}
+const b = new GUI({ target, theme: "dark", position: 'top left' })
+const antarctica = b.group({name: 'Antarctica'})
+const blendMap = antarctica.group({ name: 'Blendmap' })
+const textureGroup = blendMap.group({ name: 'Texture output' })
+textureGroup.add('canvas', blendOptions, { type: 'canvas' })
+textureGroup.action(() => {
+  blendOptions.canvas.width = blendOptions.canvas.width
+}, { name: 'Reset' })
+
+blendMap.color('color', blendOptions)
+blendMap.add('tool', blendOptions, { choices: ['Brush', 'Pencil'] })
+blendMap.add('size', blendOptions, { min: 0, max: 100 })
+blendMap.add('enabled', blendOptions)
+
+const texturesGroup = antarctica.group({ name: 'Textures' })
+
+function initTextureGroup(parent, name, data = {
+  scaleUv: 1,
+  orm: "./base.jpg",
+  diffuse: "./base.jpg",
+  normal: "./base.jpg"
+}) {
+  const g = parent.group({ name: `${name}` })
+  const updateUniform = (name, blob) => {
+    // new Texture(blob)
+    // material.uniforms[name].value = 
+  }
+  g.add('scaleUv', data, { min: 1, max: 30 })
+  g.add('orm', data, {type: 'image'}).on('update', (value) => updateUniform('orm', value))
+  g.add('normal', data, {type: 'image'}).on('update', (value) => updateUniform('orm', value))
+  g.add('diffuse', data, {type: 'image'}).on('update', (value) => updateUniform('orm', value))
+}
+
+initTextureGroup(texturesGroup, 'Rouge')
+initTextureGroup(texturesGroup, 'Vert')
+initTextureGroup(texturesGroup, 'Bleu')
+initTextureGroup(texturesGroup, 'Default')
+
+// blendMap.add('canvas', blendOptions, { type: 'canvas' })
+
 
 /**
  * GUI
@@ -43,11 +92,17 @@ a.add('image', target, { type: 'image' }).on('update', (value) => {
 a.add('count', target, { min: 10, max: 500, range: false })
 a.add('function', target, { args: [{ name: 'a', value: 1 }, { name: 'b', value: 2 }] })
 a.action(target.function, { args: [{ name: 'a', value: 1 }, { name: 'b', value: 2 }] })
+a.add('testArray', target, { choices: ['Test', 'test2'] })
 a.color('color')
 a.color('backgroundTestLongText')
 a.action(() => {
   a.theme = a.theme === 'dark' ? 'light' : 'dark'
 }, { name: 'Switch theme'})
+
+
+
+
+
 
 const rotate = a.group({ name: 'Rotation', target: target.rotation })
 rotate.add('factor', target.rotation, { range: true })

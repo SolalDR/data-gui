@@ -2,7 +2,6 @@ import { GUI } from '@/components/gui'
 import { Group } from '@/components/group'
 import raf from '@solaldr/raf'
 import { BooleanController } from './controllers/boolean-controller'
-import { ColorController } from './controllers/color-controller'
 import { ImageController } from './controllers/image-controller'
 import { NumberController } from './controllers/number-controller'
 import { SelectController } from './controllers/select-controller'
@@ -16,7 +15,6 @@ raf.start()
 GUI.register(BooleanController)
 GUI.register(ActionController)
 GUI.register(TextController)
-GUI.register(ColorController)
 GUI.register(NumberController)
 GUI.register(ImageController)
 GUI.register(SelectController)
@@ -28,7 +26,6 @@ export {
   BooleanController,
   ActionController,
   TextController,
-  ColorController,
   NumberController,
   ImageController,
   SelectController,

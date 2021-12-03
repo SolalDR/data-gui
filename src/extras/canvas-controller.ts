@@ -1,4 +1,4 @@
-import { html, customElement, css, property, query } from 'lit-element'
+import { html, customElement, css, property, queryAsync } from 'lit-element'
 import { BaseController, ControllerConstructor } from '../controller'
 import { GUI } from '../components/gui';
 
@@ -8,7 +8,7 @@ interface CanvasControllerConstructor extends ControllerConstructor{
 }
 
 /**
- * CanvasController is a controller used in 3D
+ * CanvasController is a controller used to display a simple blank canvas. It can be used for debuging texture
  * ## How to use
  * ``` javascript
 
@@ -23,7 +23,7 @@ export class CanvasController extends BaseController {
   /**
    * Public access to generated canvas
    */
-  @query('canvas') public canvas: HTMLCanvasElement
+  @queryAsync('canvas') public canvas: Promise<HTMLCanvasElement>
 
   /**
    * If not defined `step` will be calculated automatically based on initial value
@@ -40,14 +40,14 @@ export class CanvasController extends BaseController {
   /**
    * @ignore
    */
-  firstUpdated() {
-    this.value = this.canvas;
-    this.target[this.property] = this.canvas;
-    setTimeout(() => {
-      console.log(this.canvas)
-    }, 1000)
-    
-    super.connectedCallback()
+  connectedCallback() {
+
+    super.connectedCallback();
+
+    this.canvas.then((canvas) => {
+      this.value = canvas;
+      this.target[this.property] = canvas;
+    })
   }
 
   /**
@@ -64,7 +64,12 @@ export class CanvasController extends BaseController {
     return html`
       <div>
         <label>${this.name}</label>
-        <canvas></canvas>
+        <div class="right">
+          <canvas
+            .width=${this.width}
+            .height=${this.height}
+          ></canvas>
+        </div>
       </div>
     `
   }
@@ -75,22 +80,19 @@ export class CanvasController extends BaseController {
   public static styles = css`
     /*minify*/
     ${BaseController.styles}
+    div {
+      flex-wrap: wrap;
+    }
     :host {
       height: auto;
     }
-    svg {
-      height: 1em;
-    }
-
-    .input-channel {
-      margin-left: 5px;
-      min-width: 37px;
-      max-width: 37px;
-    }
-
-    .input-container {
-      justify-content: flex-end;
-      flex-direction: row;
+    canvas {
+      width: 100%;
+      margin: 5px 0; 
+      object-fit: contain;
+      flex: 1;
+      border: 1px solid var(--color-primary); 
+      border-radius: var(--radius);
     }
   `
 }

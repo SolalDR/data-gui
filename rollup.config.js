@@ -43,7 +43,12 @@ export default [
     ],
   },
   {
-    input: ['src/index.ts', 'src/extras/vector-controller.ts', 'src/extras/canvas-controller.ts'],
+    input: [
+      'src/index.ts', 
+      'src/extras/vector-controller.ts', 
+      'src/extras/canvas-controller.ts',
+      'src/extras/color-controller.ts'
+    ],
     output: [
       { dir: './dist/esm', format: 'es' },
     ],

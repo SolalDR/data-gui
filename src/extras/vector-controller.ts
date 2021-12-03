@@ -49,7 +49,7 @@ export class VectorController extends BaseController {
    * @ignore
    */
   static isCompatible(value: Vector, _: string, __: any): boolean {
-    return !!(value.x !== undefined && value.y !== undefined && !isNaN(value.x) && !isNaN(value.y))
+    return !!(value && value.x !== undefined && value.y !== undefined && !isNaN(value.x) && !isNaN(value.y))
   }
 
   /**
@@ -141,10 +141,8 @@ export class VectorController extends BaseController {
       height: 1em;
     }
 
-    .input-channel {
+    .input-channel:not(:first-child) {
       margin-left: 5px;
-      min-width: 37px;
-      max-width: 37px;
     }
 
     .input-container {
