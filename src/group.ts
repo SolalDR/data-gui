@@ -29,7 +29,6 @@ export class BaseGroup extends WebComponent {
   @property({
     type: Array, 
     hasChanged: (newer: Array<Child>, older: Array<Child>) => {
-      console.log(newer, older)
       return newer !== older || newer.length !== older.length
     } 
   }) protected childrenControllers: Array<Child> = []

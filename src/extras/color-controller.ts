@@ -1,4 +1,3 @@
-
 import { GUI } from '../components/gui';
 import { html, customElement, css, query } from 'lit-element'
 import { BaseController, ControllerConstructor } from '../controller'
@@ -85,7 +84,6 @@ export class ColorController extends BaseController {
   protected updateInputValue() {
     const hexValue = this.color.getHexString()
     this.labelValue = this.color.getRgbString()
-    // console.log(hexValue)
     if (hexValue.length > 6) {
       this.inputValue = hexValue.substring(0, 7)
     } else {
@@ -94,14 +92,10 @@ export class ColorController extends BaseController {
   }
 
   protected onInput(event) {
-    console.log('Before', this.color.getHexString())
     this.color.setStyle(event.target.value)
-    console.log('After', this.color.getHexString())
-    console.log('Format', this.color.format())
     this.set(this.color.format())
     this.updateInputValue()
     super.onInput(event)
-    console.log(event.target.value)
   }
 
   protected onInputChannel(channel, value) {

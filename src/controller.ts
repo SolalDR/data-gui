@@ -130,7 +130,6 @@ export class BaseController extends WebComponent {
   disconnectedCallback() {
     super.disconnectedCallback()
     if (this.listen) {
-      console.log('removeTick', this.name)
       raf.removeTick(this.listenCallback)
     }
   }
