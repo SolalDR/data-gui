@@ -37,7 +37,7 @@ yarn add data-gui
 
 ### Basic use
 
-<img src="./public/light.png" width="300" align="right"/>
+<img src="https://raw.githubusercontent.com/SolalDR/data-gui/master/public/light.png" width="300" align="right"/>
 
 ```javascript
 // See result below 
@@ -69,7 +69,7 @@ Consult [controller documentation](https://solaldr.github.io/data-gui/classes/ba
 
 ### GUI Configuration
 
-<img src="./public/dark-with-name2.png" width="300" align="right"/>
+<img src="https://raw.githubusercontent.com/SolalDR/data-gui/master/public/dark-with-name2.png" width="300" align="right"/>
 
 ```javascript
 const gui = new GUI({
@@ -83,8 +83,6 @@ gui.add('height', target, { min: 0, max: 500 })
 </p>
 
 Consult [GUI page](https://solaldr.github.io/data-gui/classes/gui.html) in the documentation for more information
-
-
 
 
 ## License
