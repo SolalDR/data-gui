@@ -1,5 +1,6 @@
 {
-  "entryPoints": ["src/main.ts"],
+  "entryPoints": ["src/index.ts", "src/extras"],
+  "entryPointStrategy": "expand",
   "exclude": [
     "example/*",
     "src/helpers/*"
@@ -7,9 +8,9 @@
   "excludeExternals": true,
   "excludeProtected": true,
   "excludePrivate": true,
-
-  "plugin": "typedoc-neo-theme",
   "categorizeByGroup": false,
-  "media": "media",
-  "out": "docs"
+  "mergeModulesMergeMode": "project",
+  "media": "./public",
+  "out": "docs",
+  "sort": ["source-order"]
 }

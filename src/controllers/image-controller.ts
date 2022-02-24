@@ -1,5 +1,10 @@
-import { html, property, customElement, css, query } from 'lit-element'
-import { BaseController, ControllerConstructor } from '../controller'
+import { html, customElement, css, query } from 'lit-element'
+import { BaseController, ControllerConstructor } from '@/core/controller'
+
+/**
+ * @category Constructor
+ */
+export interface ImageControllerConstructor extends ControllerConstructor {}
 
 /**
  * ## How to use
@@ -17,6 +22,8 @@ import { BaseController, ControllerConstructor } from '../controller'
  * ```
  *
  * For more information about options or events see {@link BaseController}
+ * 
+ * @category Controller
  */
 @customElement('gui-image-controller')
 export class ImageController extends BaseController {
@@ -25,7 +32,7 @@ export class ImageController extends BaseController {
    */
   @query('input') input: HTMLInputElement
 
-  constructor(parameters: ControllerConstructor) {
+  constructor(parameters: ImageControllerConstructor) {
     super(parameters)
   }
 

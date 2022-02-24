@@ -1,11 +1,14 @@
 import { property, css } from 'lit-element'
-import { WebComponent } from '@/component'
+import { WebComponent } from '@/core/component'
 import raf from '@solaldr/raf'
 import { BaseGroup } from './group'
 
 // TODO remove
 ;(window as any).raf = raf
 
+/**
+ * @category Constructor
+ */
 export interface ControllerConstructor {
   name?: string
   listen?: boolean
@@ -52,6 +55,8 @@ export interface ControllerConstructor {
  *
  * ### Remove listener
  * You can use either `off` or `removeEventListener` to do so.
+ * 
+ * @category Core
  */
 export class BaseController extends WebComponent {
   /**

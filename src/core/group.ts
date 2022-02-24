@@ -1,11 +1,14 @@
-import { html, property, css, LitElement } from 'lit-element'
-import { WebComponent } from '@/component'
-import getControllerConstructor from '@/helpers/get-controller-constructor'
-import { BaseController } from './controller'
-import { ActionController } from './controllers/action-controller'
-import { ColorController } from './extras/color-controller'
+import { html, property } from 'lit-element'
+import { WebComponent } from '@/core/component'
+import { getControllerConstructor } from '@/core/controllers'
+import { BaseController } from '@/core/controller'
+import { ActionController } from '@/controllers/action-controller'
+import { ColorController } from '@/extras/color-controller'
 
-export interface GroupConstructor {
+/**
+ * @category Constructor
+ */
+export interface BaseGroupConstructor {
   name?: string
   children?: Array<BaseGroup | BaseController>
   parent?: BaseGroup
@@ -16,6 +19,8 @@ type Child = BaseGroup|BaseController
 
 /**
  * `BaseGroup` is the mother class of {@link Group} and {@link GUI}.
+ * 
+ * @category Core
  */
 export class BaseGroup extends WebComponent {
   /**
@@ -58,7 +63,7 @@ export class BaseGroup extends WebComponent {
     children = [],
     parent = null,
     target = {},
-  }: GroupConstructor = {}) {
+  }: BaseGroupConstructor = {}) {
     super()
     this.name = name
     this.childrenControllers = children

@@ -1,16 +1,16 @@
 import { html, customElement, css, property } from 'lit-element'
-import { BaseController, ControllerConstructor } from '../controller'
+import { BaseController, ControllerConstructor } from '@/core/controller'
 import { GUI } from '../components/gui';
 import { computeStep } from '@/helpers/compute-step'
 
-// import { Group } from '../components/group'
-// import '@/components/elements/button'
-
-interface VectorControllerConstructor extends ControllerConstructor{
+/**
+ * @category Constructor
+ */
+export interface VectorControllerConstructor extends ControllerConstructor{
   step?: number
 }
 
-interface Vector {
+export interface Vector {
   x: number
   y: number
   z?: number
@@ -24,6 +24,8 @@ interface Vector {
 
  * ```
  * For more information about basic use see {@link BaseController}
+ * 
+ * @Category Extras controller
  */
 @customElement('gui-vector-controller')
 export class VectorController extends BaseController {

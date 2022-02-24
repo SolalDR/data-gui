@@ -1,6 +1,6 @@
 {
   "name": "data-gui",
-  "version": "0.6.3",
+  "version": "0.7.0",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
   "browser": "dist/index.umd.js",
@@ -20,8 +20,8 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-ts": "^1.3.7",
     "tslib": "^2.0.3",
-    "typedoc": "^0.20.28",
-    "typedoc-neo-theme": "^1.1.0",
+    "typedoc": "^0.22.12",
+    "typedoc-plugin-merge-modules": "^3.1.0",
     "typescript": "^4.1.3"
   },
   "author": {
@@ -37,7 +37,7 @@
     "commit": "npm run format && npm run doc && cz",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "deploy": "rm -rf ./dist && npm run doc && npm run build && npm publish",
-    "doc": "typedoc"
+    "doc": "npx typedoc --tsconfig ./tsconfig.json"
   },
   "files": [
     "dist"

@@ -1,8 +1,11 @@
 import { html, property, customElement, css, query } from 'lit-element'
-import { BaseController, ControllerConstructor } from '../controller'
+import { BaseController, ControllerConstructor } from '@/core/controller'
 import { computeStep } from '@/helpers/compute-step'
 
-interface NumberControllerConstructor extends ControllerConstructor {
+/**
+ * @category Constructor
+ */
+export interface NumberControllerConstructor extends ControllerConstructor {
   min?: number
   max?: number
   step?: number
@@ -25,6 +28,8 @@ interface NumberControllerConstructor extends ControllerConstructor {
  * ```
  *
  * For more information about options or events see {@link BaseController}
+ * 
+ * @category Controller
  */
 @customElement('gui-number-controller')
 export class NumberController extends BaseController {
