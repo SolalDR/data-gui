@@ -16,7 +16,7 @@ jobs:
         node-version: 12.x
     - name: Install
       run: npm install
-    - name: Build
+    - name: Generate documentation
       run: npm run doc
     - name: Build
       run: npm run build
@@ -28,7 +28,7 @@ jobs:
         create_tag: "true"
         commit_pattern: "^Release (\\S+)"
         workspace: "."
-        publish_command: "npm run deploy"
+        publish_command: "npm"
         publish_args: "--non-interactive"
       env: # More info about the environment variables in the README
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
