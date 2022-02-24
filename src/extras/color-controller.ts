@@ -1,11 +1,14 @@
-import { GUI } from '../components/gui';
+import { controllers } from '../core/controllers';
 import { html, customElement, css, query } from 'lit-element'
-import { BaseController, ControllerConstructor } from '../controller'
+import { BaseController, ControllerConstructor } from '@/core/controller'
 import { NumberController } from '@/controllers/number-controller';
 import { Color, isColor } from '@/helpers/color-helper'
 import '@/components/elements/input'
 
-interface ColorControllerConstructor extends ControllerConstructor {
+/**
+ * @category Constructor
+ */
+export interface ColorControllerConstructor extends ControllerConstructor {
   name?: string
 }
 
@@ -39,6 +42,8 @@ interface ColorControllerConstructor extends ControllerConstructor {
  * ```
  *
  * For more information about options or events see {@link BaseController}
+ * 
+ * @Category Extras controller
  */
 @customElement('gui-color-controller')
 export class ColorController extends BaseController {
@@ -234,6 +239,6 @@ export class ColorController extends BaseController {
 }
 
 
-GUI.controllers.splice(
-  GUI.controllers.indexOf(NumberController) + 1, 0, ColorController
+controllers.splice(
+  controllers.indexOf(NumberController) + 1, 0, ColorController
 )

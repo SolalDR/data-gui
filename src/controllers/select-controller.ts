@@ -1,13 +1,17 @@
-import { html, property, customElement, css, query } from 'lit-element'
-import { BaseController, ControllerConstructor } from '../controller'
+import { html, customElement, css, query } from 'lit-element'
+import { BaseController, ControllerConstructor } from '@/core/controller'
 
-interface SelectChoice {
+
+export interface SelectControllerChoice {
   label: string
   value: string
 }
 
-interface SelectConstructor extends ControllerConstructor {
-  choices: Array<SelectChoice | string>
+/**
+ * @category Constructor
+ */
+export interface SelectControllerConstructor extends ControllerConstructor {
+  choices: Array<SelectControllerChoice | string>
 }
 
 /**
@@ -20,6 +24,8 @@ interface SelectConstructor extends ControllerConstructor {
  * ```
  *
  * For more information about options or events see {@link BaseController}
+ * 
+ * @category Controller
  */
 @customElement('gui-select-controller')
 export class SelectController extends BaseController {
@@ -27,16 +33,16 @@ export class SelectController extends BaseController {
    * @ignore
    */
   @query('select') select: HTMLSelectElement
-  choices: Array<SelectChoice> = []
+  choices: Array<SelectControllerChoice> = []
 
-  constructor(parameters: SelectConstructor) {
+  constructor(parameters: SelectControllerConstructor) {
     super(parameters)
     if (parameters.choices) {
       this.choices = parameters.choices.map(c => {
         if (typeof c === 'object' && c.label && c.value) {
-          return c as SelectChoice
+          return c as SelectControllerChoice
         }
-        return { label: c, value: c } as SelectChoice
+        return { label: c, value: c } as SelectControllerChoice
       })
     }
   }

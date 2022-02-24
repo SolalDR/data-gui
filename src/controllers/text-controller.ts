@@ -1,7 +1,10 @@
 import { html, property, customElement, css } from 'lit-element'
-import { BaseController, ControllerConstructor } from '../controller'
+import { BaseController, ControllerConstructor } from '@/core/controller'
 
-interface TextControllerConstructor extends ControllerConstructor {
+/**
+ * @category Constructor
+ */
+export interface TextControllerConstructor extends ControllerConstructor {
   min?: number
   max?: number
   pattern?: string
@@ -19,6 +22,8 @@ interface TextControllerConstructor extends ControllerConstructor {
  * ```
  *
  * For more information about options or events see {@link BaseController}
+ * 
+ * @category Controller
  */
 @customElement('gui-text-controller')
 export class TextController extends BaseController {

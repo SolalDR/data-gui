@@ -1,7 +1,10 @@
 import { html, property, customElement, css, query } from 'lit-element'
-import { BaseGroup, GroupConstructor as BaseGroupConstructor } from '@/group'
+import { BaseGroup, BaseGroupConstructor } from '@/core/group'
 
-interface GroupConstructor extends BaseGroupConstructor {
+/**
+ * @category Constructor
+ */
+export interface GroupConstructor extends BaseGroupConstructor {
   opened?: boolean
 }
 @customElement('gui-group')

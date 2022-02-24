@@ -1,20 +1,26 @@
-import { html, property, customElement, css, query } from 'lit-element'
-import { BaseController, ControllerConstructor } from '../controller'
-import { Group } from '../components/group'
+import { html, customElement, css, query } from 'lit-element'
+import { BaseController, ControllerConstructor } from '@/core/controller'
+import { Group } from '@/components/group'
 import '@/components/elements/button'
 
-export interface ActionArgument {
+export interface ActionControllerArgument {
   name: string
   value: unknown
 }
+
+/**
+ * @category Constructor
+ */
 export interface ActionControllerConstructor extends ControllerConstructor {
-  args?: ActionArgument[]
+  args?: ActionControllerArgument[]
 }
 
 /**
  * ActionController is a controller used to trigger JS functions
+ * 
  * ## How to use
  * ``` javascript
+ * 
  * const callback = (a, b) => {
  *   return a + b
  * }
@@ -30,11 +36,15 @@ export interface ActionControllerConstructor extends ControllerConstructor {
  * action.run()
  * ```
  *
- * For more information about basic use see {@link BaseController}
+ * More information
+ * {@link ActionControllerConstructor}
+ * {@link BaseController}
+ * 
+ * @category Controller
  */
 @customElement('gui-action-controller')
 export class ActionController extends BaseController {
-  private arguments: ActionArgument[]
+  private arguments: ActionControllerArgument[]
   private argumentsTarget: object = {}
 
   /**

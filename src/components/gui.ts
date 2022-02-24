@@ -1,9 +1,13 @@
 import { html, property, customElement, css } from 'lit-element'
-import { BaseGroup, GroupConstructor } from '@/group'
-import { BaseController } from '@/controller'
+import { BaseGroup, BaseGroupConstructor } from '@/core/group'
+import { BaseController } from '@/core/controller'
 import { Group } from '@/components/group'
+import { registerController } from '../core/controllers'
 
-interface GUIConstructor {
+/**
+ * @category Constructor
+ */
+export interface GUIConstructor {
   position?: string
   parent?: HTMLElement
   name?: string
@@ -17,7 +21,6 @@ export class GUI extends Group {
   @property() name: string = ''
   @property({ type: String, reflect: true }) theme: string
   @property({ type: String, reflect: true }) public position?: string
-  static controllers: (typeof BaseController)[] = []
 
   constructor({
     position = 'top right',
@@ -38,14 +41,11 @@ export class GUI extends Group {
     }
   }
 
-  static register(controller: typeof BaseController, push = false) {
-    if (!controller) throw new Error('Controller cannot be registered');
-    if (GUI.controllers.indexOf(controller) === -1) {
-      GUI.controllers.unshift(controller)
-    }
+  static register(controller: typeof BaseController) {
+    registerController(controller)
   }
 
-  group(descriptor: GroupConstructor) {
+  group(descriptor: BaseGroupConstructor) {
     const group = new Group(descriptor)
     this.childrenControllers.push(group)
     this.requestUpdateInternal()

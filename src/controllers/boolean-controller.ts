@@ -1,5 +1,10 @@
-import { html, property, customElement, css, query } from 'lit-element'
-import { BaseController, ControllerConstructor } from '../controller'
+import { html, customElement, css, query } from 'lit-element'
+import { BaseController, ControllerConstructor } from '@/core/controller'
+
+/**
+ * @category Constructor
+ */
+export interface BooleanControllerConstructor extends ControllerConstructor {}
 
 /**
  * ## How to use
@@ -9,6 +14,8 @@ import { BaseController, ControllerConstructor } from '../controller'
  * ```
  *
  * For more information about options or events see {@link BaseController}
+ * 
+ * @category Controller
  */
 @customElement('gui-boolean-controller')
 export class BooleanController extends BaseController {
@@ -20,7 +27,7 @@ export class BooleanController extends BaseController {
   /**
    * @ignore
    */
-  constructor(parameters: ControllerConstructor) {
+  constructor(parameters: BooleanControllerConstructor) {
     super(parameters)
   }
 

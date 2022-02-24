@@ -1,8 +1,11 @@
 import { html, customElement, css, property, queryAsync } from 'lit-element'
-import { BaseController, ControllerConstructor } from '../controller'
-import { GUI } from '../components/gui';
+import { BaseController, ControllerConstructor } from '@/core/controller'
+import { GUI } from '@/components/gui';
 
-interface CanvasControllerConstructor extends ControllerConstructor{
+/**
+ * @category Constructor
+ */
+export interface CanvasControllerConstructor extends ControllerConstructor{
   width?: number
   height?: number
 }
@@ -14,6 +17,8 @@ interface CanvasControllerConstructor extends ControllerConstructor{
 
  * ```
  * For more information about basic use see {@link BaseController}
+ * 
+ * @Category Extras controller
  */
 @customElement('gui-canvas-controller')
 export class CanvasController extends BaseController {

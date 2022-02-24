@@ -8,20 +8,8 @@
 
 *The aim of `data-gui` is to create a scalable and lightweight user interface to tweak variables in JS.*
 
-[Documentation](https://solaldr.github.io/data-gui/index.html) — [Demo](https://data-gui.netlify.app) — [Source](https://github.com/SolalDR/data-gui)
+[Documentation](https://solaldr.github.io/data-gui/modules.html#default) — [Demo](https://data-gui.netlify.app) — [Source](https://github.com/SolalDR/data-gui)
 <br>
-
-## Features
-- [x] Control several types of data (`number`, `string`, `blob`, `boolean`, `function`, `color`)
-- [x] Automatically listen to outside changes and perform GUI updates
-- [x] Customize styles with CSS variables
-- [ ] Create custom controller
-- [ ] Save or share your preset
-
-## Dependencies
-
-- [LitElement](https://github.com/Polymer/lit-element) for webcomponents. 
-- [@solaldr/raf](https://github.com/SolalDR/raf)
 
 ## Installation
 
@@ -84,6 +72,10 @@ gui.add('height', target, { min: 0, max: 500 })
 
 Consult [GUI page](https://solaldr.github.io/data-gui/classes/gui.html) in the documentation for more information
 
+## Dependencies
+
+- [LitElement](https://github.com/Polymer/lit-element) for webcomponents. 
+- [@solaldr/raf](https://github.com/SolalDR/raf)
 
 ## License
 
